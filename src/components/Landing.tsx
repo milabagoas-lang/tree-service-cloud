@@ -4,43 +4,41 @@ import {
   ArrowRight,
   ArrowUpRight,
   Check,
-  Cloud,
-  Cpu,
-  Database,
-  GitBranch,
-  Globe,
-  Lock,
+  Facebook,
+  Instagram,
+  Leaf,
+  Mail,
   Menu,
   MessageCircle,
   Minus,
   Plus,
+  Scissors,
   Send,
-  Server,
   Shield,
   Sparkles,
-  Terminal,
+  TreeDeciduous,
+  TreePine,
+  Truck,
   X,
-  Instagram,
-  Facebook,
 } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
 import founderImg from "@/assets/founder.jpg";
 import { dicts, pathFor, type Dict, type Lang } from "@/i18n/dict";
 
 const ICONS_SKILLS = [
-  <Cloud className="h-5 w-5" key="c" />,
-  <GitBranch className="h-5 w-5" key="g" />,
-  <Server className="h-5 w-5" key="s" />,
-  <Database className="h-5 w-5" key="d" />,
+  <TreeDeciduous className="h-5 w-5" key="td" />,
+  <TreePine className="h-5 w-5" key="tp" />,
+  <Leaf className="h-5 w-5" key="l" />,
+  <Scissors className="h-5 w-5" key="s" />,
+  <Truck className="h-5 w-5" key="t" />,
   <Shield className="h-5 w-5" key="sh" />,
-  <Cpu className="h-5 w-5" key="cpu" />,
 ];
 
 const ICONS_SERVICES = [
-  <Cloud className="h-5 w-5" key="c" />,
-  <GitBranch className="h-5 w-5" key="g" />,
-  <Server className="h-5 w-5" key="s" />,
-  <Lock className="h-5 w-5" key="l" />,
+  <TreeDeciduous className="h-5 w-5" key="td" />,
+  <Scissors className="h-5 w-5" key="s" />,
+  <Leaf className="h-5 w-5" key="l" />,
+  <Truck className="h-5 w-5" key="t" />,
 ];
 
 export function Landing({ lang }: { lang: Lang }) {
@@ -329,12 +327,11 @@ function TelegramIcon() {
 
 /* ---------- Marquee ---------- */
 function Marquee({ t }: { t: Dict }) {
-  const items = ["AWS", "Google Cloud", "Kubernetes", "Terraform", "PostgreSQL", "Docker", "GitLab", "Prometheus"];
   return (
     <section aria-label={t.marquee.label} className="border-y border-border/60 bg-background/60 py-8">
       <div className="container-x flex flex-wrap items-center justify-center gap-x-10 gap-y-4 text-sm text-muted-foreground">
         <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground/70">{t.marquee.label}</span>
-        {items.map((i) => (
+        {t.marquee.items.map((i) => (
           <span key={i} className="font-display text-base font-medium text-foreground/70">
             {i}
           </span>
@@ -502,7 +499,7 @@ function Services({ t }: { t: Dict }) {
 
         <div className="mt-14 rounded-2xl border border-border bg-card/40 p-6 md:p-10">
           <div className="mb-8 flex items-center gap-3">
-            <Terminal className="h-5 w-5 text-primary" />
+            <TreeDeciduous className="h-5 w-5 text-primary" />
             <h3 className="font-display text-xl font-semibold">{t.services.processTitle}</h3>
           </div>
           <div className="grid gap-6 md:grid-cols-4">
@@ -669,7 +666,7 @@ function Contact({ t }: { t: Dict }) {
             <a href="mailto:hello@crystalcloud.dev" className="flex items-center justify-between rounded-xl border border-border bg-card/40 px-5 py-4 hover:bg-card">
               <div className="flex items-center gap-3">
                 <div className="grid h-10 w-10 place-items-center rounded-lg border border-border">
-                  <Globe className="h-5 w-5 text-muted-foreground" />
+                  <Mail className="h-5 w-5 text-muted-foreground" />
                 </div>
                 <div>
                   <div className="font-medium">hello@crystalcloud.dev</div>
@@ -703,7 +700,7 @@ function Contact({ t }: { t: Dict }) {
         <form onSubmit={onSubmit} className="card-surface space-y-4 p-6 md:p-8">
           <div className="grid gap-4 sm:grid-cols-2">
             <Field label={t.contact.form.name} name="name" placeholder={t.contact.form.namePh} required />
-            <Field label={t.contact.form.email} name="email" type="email" placeholder={t.contact.form.emailPh} required />
+            <Field label={t.contact.form.email} name="email" type="text" placeholder={t.contact.form.emailPh} required />
           </div>
           <Field label={t.contact.form.company} name="company" placeholder={t.contact.form.companyPh} />
           <div>
