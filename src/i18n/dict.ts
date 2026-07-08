@@ -17,7 +17,7 @@ export const en = {
   },
   nav: {
     about: "About",
-    skills: "Services",
+    skills: "Expertise",
     projects: "Work",
     services: "Services",
     faq: "FAQ",
