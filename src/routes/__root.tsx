@@ -74,27 +74,29 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { name: "theme-color", content: "#0A0F0D" },
-      { title: "Crystal Cloud LLC — Cloud & DevOps Consulting by Andrii Biedariev" },
+      { title: "CRYSTAL CLOUD LLC — Профессиональный спил и обрезка деревьев" },
       {
         name: "description",
         content:
-          "Crystal Cloud LLC builds resilient cloud infrastructure, DevOps pipelines and platform engineering solutions. Founded by Andrii Biedariev.",
+          "Безопасное удаление деревьев любой сложности, чистка пальм, обрезка веток над домом и услуги арбориста в Sacramento",
       },
       { name: "author", content: "Crystal Cloud LLC" },
       { property: "og:site_name", content: "Crystal Cloud LLC" },
-      { property: "og:title", content: "Crystal Cloud LLC — Cloud & DevOps Consulting" },
+      { property: "og:title", content: "CRYSTAL CLOUD LLC — Профессиональный спил и обрезка деревьев" },
       {
         property: "og:description",
         content:
-          "Premium cloud, DevOps and platform engineering by Andrii Biedariev. Case studies, services and expertise.",
+          "Безопасное удаление деревьев любой сложности, чистка пальм, обрезка веток над домом и услуги арбориста в Sacramento",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Crystal Cloud LLC" },
+      { name: "twitter:title", content: "CRYSTAL CLOUD LLC — Профессиональный спил и обрезка деревьев" },
       {
         name: "twitter:description",
-        content: "Cloud & DevOps consulting. Reliable infrastructure, delivered.",
+        content: "Безопасное удаление деревьев любой сложности, чистка пальм, обрезка веток над домом и услуги арбориста в Sacramento",
       },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/0806870e-a7ae-4dc0-8ba6-6da1c95b6239/id-preview-917701a4--7436ffef-2f6b-4dd8-9b92-d6a5e0e56de1.lovable.app-1783544069979.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/0806870e-a7ae-4dc0-8ba6-6da1c95b6239/id-preview-917701a4--7436ffef-2f6b-4dd8-9b92-d6a5e0e56de1.lovable.app-1783544069979.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
