@@ -258,7 +258,7 @@ export const ru: Dict = {
   },
   nav: {
     about: "О нас",
-    skills: "Услуги",
+    skills: "Экспертиза",
     projects: "Работы",
     services: "Услуги",
     faq: "FAQ",
