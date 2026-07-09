@@ -23,7 +23,20 @@ import {
 } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
 import founderImg from "@/assets/founder.jpg";
+import ba1Before from "@/assets/ba1-before.jpg";
+import ba1After from "@/assets/ba1-after.jpg";
+import ba2Before from "@/assets/ba2-before.jpg";
+import ba2After from "@/assets/ba2-after.jpg";
+import ba3Before from "@/assets/ba3-before.jpg";
+import ba3After from "@/assets/ba3-after.jpg";
+import { useRef } from "react";
 import { dicts, pathFor, type Dict, type Lang } from "@/i18n/dict";
+
+const GALLERY_IMAGES = [
+  { before: ba1Before, after: ba1After },
+  { before: ba2Before, after: ba2After },
+  { before: ba3Before, after: ba3After },
+];
 
 const ICONS_SKILLS = [
   <TreeDeciduous className="h-5 w-5" key="td" />,
@@ -71,6 +84,7 @@ export function Landing({ lang }: { lang: Lang }) {
       <About t={t} />
       <Skills t={t} />
       <Projects t={t} />
+      <Gallery t={t} />
       <Services t={t} />
       <Testimonials t={t} />
       <FAQ t={t} />
@@ -97,6 +111,7 @@ function Header({ lang, t }: { lang: Lang; t: Dict }) {
     { href: "#about", label: t.nav.about },
     { href: "#skills", label: t.nav.skills },
     { href: "#projects", label: t.nav.projects },
+    { href: "#gallery", label: t.gallery.eyebrow },
     { href: "#services", label: t.nav.services },
     { href: "#faq", label: t.nav.faq },
     { href: "#contact", label: t.nav.contact },
