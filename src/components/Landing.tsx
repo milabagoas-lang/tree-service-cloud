@@ -23,20 +23,14 @@ import {
 } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
 import founderImg from "@/assets/founder.jpg";
-import ba1Before from "@/assets/ba1-before.jpg";
-import ba1After from "@/assets/ba1-after.jpg";
-import ba2Before from "@/assets/ba2-before.jpg";
-import ba2After from "@/assets/ba2-after.jpg";
-import ba3Before from "@/assets/ba3-before.jpg";
-import ba3After from "@/assets/ba3-after.jpg";
+import gallery1 from "@/assets/0708_1.png.asset.json";
+import gallery2 from "@/assets/0708_1_1.png.asset.json";
+import gallery3 from "@/assets/0708_1_3.png.asset.json";
+import gallery4 from "@/assets/0708_1_4.png.asset.json";
 
 import { dicts, pathFor, type Dict, type Lang } from "@/i18n/dict";
 
-const GALLERY_IMAGES = [
-  { before: ba1Before, after: ba1After },
-  { before: ba2Before, after: ba2After },
-  { before: ba3Before, after: ba3After },
-];
+const GALLERY_PHOTOS = [gallery1.url, gallery2.url, gallery3.url, gallery4.url];
 
 const ICONS_SKILLS = [
   <TreeDeciduous className="h-5 w-5" key="td" />,
