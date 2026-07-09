@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "@tanstack/react-router";
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -23,7 +23,20 @@ import {
 } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
 import founderImg from "@/assets/founder.jpg";
+import ba1Before from "@/assets/ba1-before.jpg";
+import ba1After from "@/assets/ba1-after.jpg";
+import ba2Before from "@/assets/ba2-before.jpg";
+import ba2After from "@/assets/ba2-after.jpg";
+import ba3Before from "@/assets/ba3-before.jpg";
+import ba3After from "@/assets/ba3-after.jpg";
+
 import { dicts, pathFor, type Dict, type Lang } from "@/i18n/dict";
+
+const GALLERY_IMAGES = [
+  { before: ba1Before, after: ba1After },
+  { before: ba2Before, after: ba2After },
+  { before: ba3Before, after: ba3After },
+];
 
 const ICONS_SKILLS = [
   <TreeDeciduous className="h-5 w-5" key="td" />,
@@ -71,6 +84,7 @@ export function Landing({ lang }: { lang: Lang }) {
       <About t={t} />
       <Skills t={t} />
       <Projects t={t} />
+      <Gallery t={t} />
       <Services t={t} />
       <Testimonials t={t} />
       <FAQ t={t} />
@@ -97,6 +111,7 @@ function Header({ lang, t }: { lang: Lang; t: Dict }) {
     { href: "#about", label: t.nav.about },
     { href: "#skills", label: t.nav.skills },
     { href: "#projects", label: t.nav.projects },
+    { href: "#gallery", label: t.gallery.eyebrow },
     { href: "#services", label: t.nav.services },
     { href: "#faq", label: t.nav.faq },
     { href: "#contact", label: t.nav.contact },
@@ -460,6 +475,153 @@ function Projects({ t }: { t: Dict }) {
         </div>
       </div>
     </section>
+  );
+}
+
+/* ---------- Gallery (Before / After) ---------- */
+function Gallery({ t }: { t: Dict }) {
+  return (
+    <section id="gallery" className="section-y border-t border-border/60">
+      <div className="container-x">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="eyebrow justify-center">{t.gallery.eyebrow}</p>
+          <h2 className="mt-4 font-display text-3xl font-semibold md:text-5xl">
+            {t.gallery.title}
+          </h2>
+          <p className="mt-4 text-muted-foreground">{t.gallery.subtitle}</p>
+        </div>
+
+        <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {t.gallery.items.map((item, i) => (
+            <figure key={item.title} className="card-surface overflow-hidden p-0">
+              <BeforeAfter
+                before={GALLERY_IMAGES[i].before}
+                after={GALLERY_IMAGES[i].after}
+                beforeLabel={t.gallery.beforeLabel}
+                afterLabel={t.gallery.afterLabel}
+                hint={t.gallery.hint}
+                alt={item.title}
+              />
+              <figcaption className="flex items-center justify-between gap-3 border-t border-border p-4">
+                <span className="text-sm font-medium text-foreground">{item.title}</span>
+                <span className="rounded-full border border-primary/30 bg-primary/10 px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-primary">
+                  {item.tag}
+                </span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function BeforeAfter({
+  before,
+  after,
+  beforeLabel,
+  afterLabel,
+  hint,
+  alt,
+}: {
+  before: string;
+  after: string;
+  beforeLabel: string;
+  afterLabel: string;
+  hint: string;
+  alt: string;
+}) {
+  const [pos, setPos] = useState(50);
+  const wrapRef = useRef<HTMLDivElement | null>(null);
+  const dragging = useRef(false);
+
+  const update = (clientX: number) => {
+    const el = wrapRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const p = ((clientX - rect.left) / rect.width) * 100;
+    setPos(Math.max(0, Math.min(100, p)));
+  };
+
+  const onDown = (e: React.PointerEvent) => {
+    dragging.current = true;
+    (e.target as Element).setPointerCapture?.(e.pointerId);
+    update(e.clientX);
+  };
+  const onMove = (e: React.PointerEvent) => {
+    if (!dragging.current) return;
+    update(e.clientX);
+  };
+  const onUp = () => {
+    dragging.current = false;
+  };
+
+  return (
+    <div
+      ref={wrapRef}
+      className="relative aspect-[4/3] w-full select-none overflow-hidden bg-background"
+      onPointerDown={onDown}
+      onPointerMove={onMove}
+      onPointerUp={onUp}
+      onPointerCancel={onUp}
+      role="slider"
+      aria-label={`${beforeLabel} / ${afterLabel}`}
+      aria-valuemin={0}
+      aria-valuemax={100}
+      aria-valuenow={Math.round(pos)}
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === "ArrowLeft") setPos((p) => Math.max(0, p - 4));
+        if (e.key === "ArrowRight") setPos((p) => Math.min(100, p + 4));
+      }}
+    >
+      <img
+        src={after}
+        alt={`${alt} — ${afterLabel}`}
+        width={1024}
+        height={768}
+        loading="lazy"
+        className="absolute inset-0 h-full w-full object-cover"
+        draggable={false}
+      />
+      <div
+        className="absolute inset-0 h-full overflow-hidden"
+        style={{ width: `${pos}%` }}
+      >
+        <img
+          src={before}
+          alt={`${alt} — ${beforeLabel}`}
+          width={1024}
+          height={768}
+          loading="lazy"
+          className="absolute inset-0 h-full w-full object-cover"
+          style={{ width: `${(100 / Math.max(pos, 0.0001)) * 100}%`, maxWidth: "none" }}
+          draggable={false}
+        />
+      </div>
+
+      <span className="pointer-events-none absolute left-3 top-3 rounded-full border border-border bg-background/70 px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-foreground backdrop-blur">
+        {beforeLabel}
+      </span>
+      <span className="pointer-events-none absolute right-3 top-3 rounded-full border border-primary/40 bg-primary/20 px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-primary backdrop-blur">
+        {afterLabel}
+      </span>
+
+      <div
+        className="pointer-events-none absolute inset-y-0"
+        style={{ left: `${pos}%`, transform: "translateX(-50%)" }}
+      >
+        <div className="h-full w-px bg-primary/80 shadow-[0_0_20px_2px_oklch(0.72_0.17_162/0.5)]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 grid h-10 w-10 place-items-center rounded-full border border-primary/60 bg-background/80 text-primary backdrop-blur">
+          <ArrowRight className="h-4 w-4 -translate-x-1" />
+          <ArrowRight className="h-4 w-4 absolute rotate-180 translate-x-1" />
+        </div>
+      </div>
+
+      <span className="pointer-events-none absolute bottom-3 left-1/2 -translate-x-1/2 rounded-full border border-border bg-background/60 px-3 py-1 text-[10px] text-muted-foreground backdrop-blur">
+        {hint}
+      </span>
+    </div>
   );
 }
 

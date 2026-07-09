@@ -120,6 +120,19 @@ export const en = {
       },
     ],
   },
+  gallery: {
+    eyebrow: "Before / After",
+    title: "See the difference we make.",
+    subtitle: "Drag the slider to compare each job before and after our crew finished.",
+    beforeLabel: "Before",
+    afterLabel: "After",
+    hint: "Drag to compare",
+    items: [
+      { title: "Oak removal in a tight backyard", tag: "Removal" },
+      { title: "Palm cleaning & skinning", tag: "Palm care" },
+      { title: "Branch clearance over a roof", tag: "Pruning" },
+    ],
+  },
   services: {
     eyebrow: "Services",
     title: "How we work with you.",
@@ -359,6 +372,19 @@ export const ru: Dict = {
           { k: "24/7", v: "Дежурство" },
         ],
       },
+    ],
+  },
+  gallery: {
+    eyebrow: "До / После",
+    title: "Посмотрите разницу, которую мы делаем.",
+    subtitle: "Перетащите ползунок, чтобы сравнить объект до и после нашей работы.",
+    beforeLabel: "До",
+    afterLabel: "После",
+    hint: "Перетащите для сравнения",
+    items: [
+      { title: "Спил дуба в тесном дворе", tag: "Спил" },
+      { title: "Чистка и шкурение пальмы", tag: "Пальмы" },
+      { title: "Просвет веток над крышей", tag: "Обрезка" },
     ],
   },
   services: {
