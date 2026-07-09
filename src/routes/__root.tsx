@@ -78,7 +78,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "Безопасное удаление деревьев любой сложности, чистка пальм, обрезка веток над домом и услуги арбориста в Sacramento",
+          "Безопасное удаление деревьев любой сложности, чистка пальм, обрезка веток над домом и услуги арбориста в Sacramento. 📞 916-890-8080",
       },
       { name: "author", content: "Crystal Cloud LLC" },
       { property: "og:site_name", content: "Crystal Cloud LLC" },
@@ -86,14 +86,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         property: "og:description",
         content:
-          "Безопасное удаление деревьев любой сложности, чистка пальм, обрезка веток над домом и услуги арбориста в Sacramento",
+          "Безопасное удаление деревьев любой сложности, чистка пальм, обрезка веток над домом и услуги арбориста в Sacramento. 📞 916-890-8080",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "CRYSTAL CLOUD LLC — Профессиональный спил и обрезка деревьев" },
       {
         name: "twitter:description",
-        content: "Безопасное удаление деревьев любой сложности, чистка пальм, обрезка веток над домом и услуги арбориста в Sacramento",
+        content: "Безопасное удаление деревьев любой сложности, чистка пальм, обрезка веток над домом и услуги арбориста в Sacramento. 📞 916-890-8080",
       },
       { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/0806870e-a7ae-4dc0-8ba6-6da1c95b6239/id-preview-917701a4--7436ffef-2f6b-4dd8-9b92-d6a5e0e56de1.lovable.app-1783544069979.png" },
       { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/0806870e-a7ae-4dc0-8ba6-6da1c95b6239/id-preview-917701a4--7436ffef-2f6b-4dd8-9b92-d6a5e0e56de1.lovable.app-1783544069979.png" },
