@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "@tanstack/react-router";
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -29,7 +29,7 @@ import ba2Before from "@/assets/ba2-before.jpg";
 import ba2After from "@/assets/ba2-after.jpg";
 import ba3Before from "@/assets/ba3-before.jpg";
 import ba3After from "@/assets/ba3-after.jpg";
-import { useRef } from "react";
+
 import { dicts, pathFor, type Dict, type Lang } from "@/i18n/dict";
 
 const GALLERY_IMAGES = [
