@@ -118,7 +118,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           description:
             "Cloud infrastructure, DevOps and platform engineering consulting.",
           sameAs: [
-            "https://t.me/crystalcloud",
+            "https://t.me/crystalcloudllc_bot",
             "https://instagram.com/crystalcloud",
             "https://facebook.com/crystalcloud",
           ],
