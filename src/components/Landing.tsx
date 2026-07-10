@@ -85,7 +85,7 @@ export function Landing({ lang }: { lang: Lang }) {
       <Testimonials t={t} />
       <FAQ t={t} />
       <Blog t={t} />
-      <Contact t={t} />
+      <Contact t={t} lang={lang} />
       <Footer t={t} lang={lang} />
     </main>
   );
