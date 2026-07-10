@@ -1,5 +1,7 @@
 import { Link, useNavigate } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useState, type FormEvent } from "react";
+import { sendContactMessage } from "@/lib/contact.functions";
 import {
   ArrowRight,
   ArrowUpRight,
