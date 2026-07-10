@@ -678,14 +678,40 @@ function Blog({ t }: { t: Dict }) {
 }
 
 /* ---------- Contact ---------- */
-function Contact({ t }: { t: Dict }) {
+function Contact({ t, lang }: { t: Dict; lang: "en" | "ru" }) {
   const [sent, setSent] = useState(false);
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const send = useServerFn(sendContactMessage);
+
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSent(true);
-    (e.currentTarget as HTMLFormElement).reset();
-    setTimeout(() => setSent(false), 4000);
+    if (sending) return;
+    const form = e.currentTarget;
+    const fd = new FormData(form);
+    setError(null);
+    setSending(true);
+    try {
+      await send({
+        data: {
+          name: String(fd.get("name") ?? ""),
+          email: String(fd.get("email") ?? ""),
+          company: String(fd.get("company") ?? ""),
+          message: String(fd.get("message") ?? ""),
+          lang,
+        },
+      });
+      setSent(true);
+      form.reset();
+      setTimeout(() => setSent(false), 4000);
+    } catch (err) {
+      console.error(err);
+      setError(lang === "ru" ? "Не удалось отправить. Попробуйте позже." : "Failed to send. Please try again.");
+    } finally {
+      setSending(false);
+    }
   };
+
 
   return (
     <section id="contact" className="section-y border-t border-border/60">
