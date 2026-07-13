@@ -489,44 +489,131 @@ function Projects({ t }: { t: Dict }) {
   );
 }
 
-/* ---------- Gallery (Before / After) ---------- */
-function Gallery({ t }: { t: Dict }) {
+/* ---------- Portfolio (from DB) ---------- */
+function Portfolio({ t, items }: { t: Dict; items: PortfolioItem[] }) {
+  const [active, setActive] = useState<PortfolioItem | null>(null);
+  if (items.length === 0) return null;
   return (
     <section id="gallery" className="section-y border-t border-border/60">
       <div className="container-x">
         <div className="mx-auto max-w-3xl text-center">
           <p className="eyebrow justify-center">{t.gallery.eyebrow}</p>
-          <h2 className="mt-4 font-display text-3xl font-semibold md:text-5xl">
-            {t.gallery.title}
-          </h2>
+          <h2 className="mt-4 font-display text-3xl font-semibold md:text-5xl">{t.gallery.title}</h2>
           <p className="mt-4 text-muted-foreground">{t.gallery.subtitle}</p>
         </div>
 
-        <div className="mt-14 grid gap-6 sm:grid-cols-2">
-          {GALLERY_PHOTOS.map((src, i) => (
-            <figure
-              key={src}
-              className="card-surface card-hover group relative overflow-hidden p-0"
+        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {items.map((it) => (
+            <button
+              key={it.id}
+              onClick={() => it.video_url && setActive(it)}
+              className="card-surface card-hover group relative overflow-hidden p-0 text-left"
             >
               <div className="relative aspect-[4/3] w-full overflow-hidden bg-background">
-                <img
-                  src={src}
-                  alt={`${t.gallery.beforeLabel} / ${t.gallery.afterLabel} — ${i + 1}`}
-                  loading="lazy"
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                />
-                <span className="pointer-events-none absolute left-3 top-3 rounded-full border border-border bg-background/70 px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-foreground backdrop-blur">
-                  {t.gallery.beforeLabel}
-                </span>
-                <span className="pointer-events-none absolute right-3 top-3 rounded-full border border-primary/40 bg-primary/20 px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-primary backdrop-blur">
-                  {t.gallery.afterLabel}
-                </span>
+                {it.cover_url ? (
+                  <img
+                    src={it.cover_url}
+                    alt={it.title}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  />
+                ) : (
+                  <div className="grid h-full w-full place-items-center text-muted-foreground">
+                    <TreeDeciduous className="h-10 w-10" />
+                  </div>
+                )}
+                {it.video_url && (
+                  <div className="absolute inset-0 grid place-items-center bg-black/20 opacity-0 transition-opacity group-hover:opacity-100">
+                    <div className="grid h-14 w-14 place-items-center rounded-full bg-primary text-primary-foreground shadow-2xl">
+                      <Play className="h-6 w-6 translate-x-0.5" />
+                    </div>
+                  </div>
+                )}
+                {it.category && (
+                  <span className="absolute left-3 top-3 rounded-full border border-primary/40 bg-primary/20 px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-primary backdrop-blur">
+                    {it.category}
+                  </span>
+                )}
               </div>
-            </figure>
+              <div className="p-4">
+                <div className="font-display font-semibold">{it.title}</div>
+                {it.description && <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">{it.description}</p>}
+              </div>
+            </button>
           ))}
         </div>
       </div>
+
+      {active && <VideoModal item={active} onClose={() => setActive(null)} />}
     </section>
+  );
+}
+
+function VideoModal({ item, onClose }: { item: PortfolioItem; onClose: () => void }) {
+  const video = item.video_url ? parseVideoUrl(item.video_url) : null;
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    window.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [onClose]);
+  return (
+    <div
+      className="fixed inset-0 z-[100] grid place-items-center bg-black/85 p-4 backdrop-blur-sm animate-fade-up"
+      onClick={onClose}
+    >
+      <div className="relative w-full max-w-4xl" onClick={(e) => e.stopPropagation()}>
+        <button
+          onClick={onClose}
+          className="absolute -right-2 -top-12 grid h-10 w-10 place-items-center rounded-full border border-border bg-background text-foreground hover:bg-secondary"
+          aria-label="Close"
+        >
+          <X className="h-5 w-5" />
+        </button>
+        <div className="overflow-hidden rounded-2xl border border-border bg-background">
+          {video ? (
+            video.type === "tiktok" ? (
+              <div className="aspect-[9/16] max-h-[80vh] w-full">
+                <iframe
+                  src={video.embedUrl}
+                  className="h-full w-full"
+                  allow="autoplay; encrypted-media; picture-in-picture; clipboard-write"
+                  allowFullScreen
+                />
+              </div>
+            ) : (
+              <div className="aspect-video w-full">
+                <iframe
+                  src={video.embedUrl}
+                  className="h-full w-full"
+                  allow="autoplay; encrypted-media; picture-in-picture; clipboard-write"
+                  allowFullScreen
+                />
+              </div>
+            )
+          ) : (
+            <div className="p-8 text-center text-sm text-muted-foreground">Видео недоступно</div>
+          )}
+          <div className="border-t border-border p-5">
+            <div className="font-display text-lg font-semibold">{item.title}</div>
+            {item.description && <p className="mt-1 text-sm text-muted-foreground">{item.description}</p>}
+            {item.video_url && (
+              <a
+                href={item.video_url}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-3 inline-flex items-center gap-1.5 text-xs text-primary hover:underline"
+              >
+                Открыть оригинал <ArrowUpRight className="h-3 w-3" />
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 
