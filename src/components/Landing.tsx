@@ -619,7 +619,11 @@ function VideoModal({ item, onClose }: { item: PortfolioItem; onClose: () => voi
 
 
 /* ---------- Services ---------- */
-function Services({ t }: { t: Dict }) {
+function Services({ t, overrides, lang }: { t: Dict; overrides?: SiteContentMap; lang: Lang }) {
+  const custom = overrides?.services ?? [];
+  const items = custom.length > 0
+    ? custom.map((s) => ({ title: s[lang].title, body: s[lang].body, points: s[lang].points }))
+    : t.services.items;
   return (
     <section id="services" className="section-y border-t border-border/60">
       <div className="container-x">
@@ -630,15 +634,15 @@ function Services({ t }: { t: Dict }) {
         </div>
 
         <div className="mt-14 grid gap-4 md:grid-cols-2">
-          {t.services.items.map((s, i) => (
-            <div key={s.title} className="card-surface card-hover p-6 md:p-7">
+          {items.map((s, i) => (
+            <div key={s.title + i} className="card-surface card-hover p-6 md:p-7">
               <div className="flex items-start gap-4">
                 <div className="grid h-11 w-11 shrink-0 place-items-center rounded-lg border border-primary/30 bg-primary/10 text-primary">
-                  {ICONS_SERVICES[i]}
+                  {ICONS_SERVICES[i % ICONS_SERVICES.length]}
                 </div>
                 <div className="min-w-0">
                   <h3 className="font-display text-lg font-semibold">{s.title}</h3>
-                  <p className="mt-1.5 text-sm text-muted-foreground">{s.body}</p>
+                  <p className="mt-1.5 text-sm text-muted-foreground whitespace-pre-line">{s.body}</p>
                   <ul className="mt-4 flex flex-wrap gap-2">
                     {s.points.map((p) => (
                       <li key={p} className="rounded-md border border-border bg-secondary/40 px-2.5 py-1 text-xs text-muted-foreground">
