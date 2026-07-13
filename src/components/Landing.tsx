@@ -862,21 +862,25 @@ function Contact({ t, lang, socials }: { t: Dict; lang: "en" | "ru"; socials?: S
             </a>
           </div>
 
-          <div className="mt-8 flex gap-3">
-            {[
-              { href: "https://t.me/crystalcloudllc_bot", icon: <TelegramIcon />, label: "Telegram" },
-              { href: "https://instagram.com", icon: <Instagram className="h-4 w-4" />, label: "Instagram" },
-              { href: "https://facebook.com", icon: <Facebook className="h-4 w-4" />, label: "Facebook" },
-            ].map((s) => (
+          <div className="mt-8 flex flex-wrap gap-3">
+            {(socials && socials.length > 0
+              ? socials.map((s) => ({ href: s.url, label: s.label || s.platform, icon: socialIcon(s.platform) }))
+              : [
+                  { href: "https://t.me/crystalcloudllc_bot", icon: <TelegramIcon />, label: "Telegram" },
+                  { href: "https://instagram.com", icon: <Instagram className="h-4 w-4" />, label: "Instagram" },
+                  { href: "https://facebook.com", icon: <Facebook className="h-4 w-4" />, label: "Facebook" },
+                ]
+            ).map((s) => (
               <a
-                key={s.label}
+                key={s.label + s.href}
                 href={s.href}
                 target="_blank"
                 rel="noreferrer"
                 aria-label={s.label}
-                className="grid h-10 w-10 place-items-center rounded-lg border border-border text-muted-foreground transition-colors hover:border-primary/40 hover:text-primary"
+                className="inline-flex items-center gap-2 rounded-lg border border-border px-3 h-10 text-sm text-muted-foreground transition-colors hover:border-primary/40 hover:text-primary"
               >
                 {s.icon}
+                <span className="hidden sm:inline">{s.label}</span>
               </a>
             ))}
           </div>
