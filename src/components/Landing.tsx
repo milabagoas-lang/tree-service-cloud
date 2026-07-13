@@ -1,7 +1,9 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useState, type FormEvent } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { sendContactMessage } from "@/lib/contact.functions";
+import { fetchSiteContent, fetchPortfolio, parseVideoUrl, type SiteContentMap, type PortfolioItem, type SocialLink } from "@/lib/site-content";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -13,6 +15,8 @@ import {
   Menu,
   MessageCircle,
   Minus,
+  Music2,
+  Play,
   Plus,
   Scissors,
   Send,
@@ -22,17 +26,12 @@ import {
   TreePine,
   Truck,
   X,
+  Youtube,
 } from "lucide-react";
-import heroBg from "@/assets/hero-bg.jpg";
-import founderImg from "@/assets/founder.jpg";
-import gallery1 from "@/assets/0708_1.png.asset.json";
-import gallery2 from "@/assets/0708_1_1.png.asset.json";
-import gallery3 from "@/assets/0708_1_3.png.asset.json";
-import gallery4 from "@/assets/0708_1_4.png.asset.json";
+import heroBgDefault from "@/assets/hero-bg.jpg";
+import founderImgDefault from "@/assets/founder.jpg";
 
 import { dicts, pathFor, type Dict, type Lang } from "@/i18n/dict";
-
-const GALLERY_PHOTOS = [gallery1.url, gallery2.url, gallery3.url, gallery4.url];
 
 const ICONS_SKILLS = [
   <TreeDeciduous className="h-5 w-5" key="td" />,
@@ -53,7 +52,12 @@ const ICONS_SERVICES = [
 export function Landing({ lang }: { lang: Lang }) {
   const t = dicts[lang];
 
-  // Auto-detect browser language on first visit (only on the EN homepage)
+  const { data: overrides } = useQuery({ queryKey: ["site_content"], queryFn: fetchSiteContent });
+  const { data: portfolio = [] } = useQuery({ queryKey: ["portfolio"], queryFn: fetchPortfolio });
+
+  const heroBg = overrides?.hero_image?.url || heroBgDefault;
+  const founderImg = overrides?.founder_image?.url || founderImgDefault;
+
   const navigate = useNavigate();
   useEffect(() => {
     if (lang !== "en") return;
@@ -75,17 +79,17 @@ export function Landing({ lang }: { lang: Lang }) {
   return (
     <main className="relative min-h-dvh overflow-x-hidden bg-background text-foreground">
       <Header lang={lang} t={t} />
-      <Hero t={t} />
+      <Hero t={t} heroBg={heroBg} overrides={overrides} lang={lang} />
       <Marquee t={t} />
-      <About t={t} />
+      <About t={t} founderImg={founderImg} overrides={overrides} lang={lang} />
       <Skills t={t} />
       <Projects t={t} />
-      <Gallery t={t} />
-      <Services t={t} />
+      <Portfolio t={t} items={portfolio} />
+      <Services t={t} overrides={overrides} lang={lang} />
       <Testimonials t={t} />
       <FAQ t={t} />
       <Blog t={t} />
-      <Contact t={t} lang={lang} />
+      <Contact t={t} lang={lang} socials={overrides?.contacts_socials} />
       <Footer t={t} lang={lang} />
     </main>
   );
@@ -237,7 +241,11 @@ function LangSwitcher({ lang, label }: { lang: Lang; label: string }) {
 }
 
 /* ---------- Hero ---------- */
-function Hero({ t }: { t: Dict }) {
+function Hero({ t, heroBg, overrides, lang }: { t: Dict; heroBg: string; overrides?: SiteContentMap; lang: Lang }) {
+  const ho = overrides?.hero_texts?.[lang];
+  const titleA = ho?.titleA?.trim() || t.hero.titleA;
+  const titleB = ho?.titleB?.trim() || t.hero.titleB;
+  const subtitle = ho?.subtitle?.trim();
   return (
     <section id="top" className="relative isolate overflow-hidden pb-24 pt-32 md:pb-32 md:pt-40">
       <div className="absolute inset-0 -z-10">
@@ -266,16 +274,20 @@ function Hero({ t }: { t: Dict }) {
           </div>
 
           <h1 className="font-display text-4xl font-semibold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl">
-            <span className="text-gradient">{t.hero.titleA}</span>
+            <span className="text-gradient">{titleA}</span>
             <br />
-            <span className="accent-gradient">{t.hero.titleB}</span>
+            <span className="accent-gradient">{titleB}</span>
           </h1>
 
-          <p className="mx-auto mt-6 max-w-2xl text-base text-muted-foreground md:text-lg">
-            {t.hero.subtitleA}
-            <span className="text-foreground">{t.hero.subtitleFounder}</span>
-            {t.hero.subtitleB}
-          </p>
+          {subtitle ? (
+            <p className="mx-auto mt-6 max-w-2xl text-base text-muted-foreground md:text-lg">{subtitle}</p>
+          ) : (
+            <p className="mx-auto mt-6 max-w-2xl text-base text-muted-foreground md:text-lg">
+              {t.hero.subtitleA}
+              <span className="text-foreground">{t.hero.subtitleFounder}</span>
+              {t.hero.subtitleB}
+            </p>
+          )}
 
           <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <a
@@ -328,6 +340,17 @@ function SocialLink({ href, icon, label }: { href: string; icon: React.ReactNode
   );
 }
 
+function socialIcon(platform: string) {
+  const p = platform.toLowerCase();
+  if (p.includes("telegram")) return <TelegramIcon />;
+  if (p.includes("instagram")) return <Instagram className="h-4 w-4" />;
+  if (p.includes("facebook")) return <Facebook className="h-4 w-4" />;
+  if (p.includes("tiktok")) return <Music2 className="h-4 w-4" />;
+  if (p.includes("youtube")) return <Youtube className="h-4 w-4" />;
+  if (p.includes("whatsapp") || p.includes("mail")) return <MessageCircle className="h-4 w-4" />;
+  return <ArrowUpRight className="h-4 w-4" />;
+}
+
 function TelegramIcon() {
   return (
     <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current" aria-hidden>
@@ -353,7 +376,10 @@ function Marquee({ t }: { t: Dict }) {
 }
 
 /* ---------- About ---------- */
-function About({ t }: { t: Dict }) {
+function About({ t, founderImg, overrides, lang }: { t: Dict; founderImg: string; overrides?: SiteContentMap; lang: Lang }) {
+  const ao = overrides?.about_texts?.[lang];
+  const body = ao?.body?.trim() || t.about.body;
+  const values = ao?.values && ao.values.length > 0 ? ao.values : t.about.values;
   return (
     <section id="about" className="section-y">
       <div className="container-x grid gap-12 md:grid-cols-[1fr_1.2fr] md:gap-16">
@@ -379,10 +405,10 @@ function About({ t }: { t: Dict }) {
           <h2 className="mt-4 font-display text-3xl font-semibold leading-tight md:text-5xl">
             {t.about.titleA}<span className="accent-gradient">{t.about.titleAccent}</span>
           </h2>
-          <p className="mt-6 text-base text-muted-foreground md:text-lg">{t.about.body}</p>
+          <p className="mt-6 text-base text-muted-foreground md:text-lg whitespace-pre-line">{body}</p>
 
           <ul className="mt-8 grid gap-3 sm:grid-cols-2">
-            {t.about.values.map((v) => (
+            {values.map((v) => (
               <li key={v} className="flex items-center gap-3 rounded-lg border border-border bg-card/50 px-4 py-3 text-sm">
                 <Check className="h-4 w-4 text-primary" /> {v}
               </li>
@@ -474,50 +500,141 @@ function Projects({ t }: { t: Dict }) {
   );
 }
 
-/* ---------- Gallery (Before / After) ---------- */
-function Gallery({ t }: { t: Dict }) {
+/* ---------- Portfolio (from DB) ---------- */
+function Portfolio({ t, items }: { t: Dict; items: PortfolioItem[] }) {
+  const [active, setActive] = useState<PortfolioItem | null>(null);
+  if (items.length === 0) return null;
   return (
     <section id="gallery" className="section-y border-t border-border/60">
       <div className="container-x">
         <div className="mx-auto max-w-3xl text-center">
           <p className="eyebrow justify-center">{t.gallery.eyebrow}</p>
-          <h2 className="mt-4 font-display text-3xl font-semibold md:text-5xl">
-            {t.gallery.title}
-          </h2>
+          <h2 className="mt-4 font-display text-3xl font-semibold md:text-5xl">{t.gallery.title}</h2>
           <p className="mt-4 text-muted-foreground">{t.gallery.subtitle}</p>
         </div>
 
-        <div className="mt-14 grid gap-6 sm:grid-cols-2">
-          {GALLERY_PHOTOS.map((src, i) => (
-            <figure
-              key={src}
-              className="card-surface card-hover group relative overflow-hidden p-0"
+        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {items.map((it) => (
+            <button
+              key={it.id}
+              onClick={() => it.video_url && setActive(it)}
+              className="card-surface card-hover group relative overflow-hidden p-0 text-left"
             >
               <div className="relative aspect-[4/3] w-full overflow-hidden bg-background">
-                <img
-                  src={src}
-                  alt={`${t.gallery.beforeLabel} / ${t.gallery.afterLabel} — ${i + 1}`}
-                  loading="lazy"
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                />
-                <span className="pointer-events-none absolute left-3 top-3 rounded-full border border-border bg-background/70 px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-foreground backdrop-blur">
-                  {t.gallery.beforeLabel}
-                </span>
-                <span className="pointer-events-none absolute right-3 top-3 rounded-full border border-primary/40 bg-primary/20 px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-primary backdrop-blur">
-                  {t.gallery.afterLabel}
-                </span>
+                {it.cover_url ? (
+                  <img
+                    src={it.cover_url}
+                    alt={it.title}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  />
+                ) : (
+                  <div className="grid h-full w-full place-items-center text-muted-foreground">
+                    <TreeDeciduous className="h-10 w-10" />
+                  </div>
+                )}
+                {it.video_url && (
+                  <div className="absolute inset-0 grid place-items-center bg-black/20 opacity-0 transition-opacity group-hover:opacity-100">
+                    <div className="grid h-14 w-14 place-items-center rounded-full bg-primary text-primary-foreground shadow-2xl">
+                      <Play className="h-6 w-6 translate-x-0.5" />
+                    </div>
+                  </div>
+                )}
+                {it.category && (
+                  <span className="absolute left-3 top-3 rounded-full border border-primary/40 bg-primary/20 px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-primary backdrop-blur">
+                    {it.category}
+                  </span>
+                )}
               </div>
-            </figure>
+              <div className="p-4">
+                <div className="font-display font-semibold">{it.title}</div>
+                {it.description && <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">{it.description}</p>}
+              </div>
+            </button>
           ))}
         </div>
       </div>
+
+      {active && <VideoModal item={active} onClose={() => setActive(null)} />}
     </section>
+  );
+}
+
+function VideoModal({ item, onClose }: { item: PortfolioItem; onClose: () => void }) {
+  const video = item.video_url ? parseVideoUrl(item.video_url) : null;
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    window.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [onClose]);
+  return (
+    <div
+      className="fixed inset-0 z-[100] grid place-items-center bg-black/85 p-4 backdrop-blur-sm animate-fade-up"
+      onClick={onClose}
+    >
+      <div className="relative w-full max-w-4xl" onClick={(e) => e.stopPropagation()}>
+        <button
+          onClick={onClose}
+          className="absolute -right-2 -top-12 grid h-10 w-10 place-items-center rounded-full border border-border bg-background text-foreground hover:bg-secondary"
+          aria-label="Close"
+        >
+          <X className="h-5 w-5" />
+        </button>
+        <div className="overflow-hidden rounded-2xl border border-border bg-background">
+          {video ? (
+            video.type === "tiktok" ? (
+              <div className="aspect-[9/16] max-h-[80vh] w-full">
+                <iframe
+                  src={video.embedUrl}
+                  className="h-full w-full"
+                  allow="autoplay; encrypted-media; picture-in-picture; clipboard-write"
+                  allowFullScreen
+                />
+              </div>
+            ) : (
+              <div className="aspect-video w-full">
+                <iframe
+                  src={video.embedUrl}
+                  className="h-full w-full"
+                  allow="autoplay; encrypted-media; picture-in-picture; clipboard-write"
+                  allowFullScreen
+                />
+              </div>
+            )
+          ) : (
+            <div className="p-8 text-center text-sm text-muted-foreground">Видео недоступно</div>
+          )}
+          <div className="border-t border-border p-5">
+            <div className="font-display text-lg font-semibold">{item.title}</div>
+            {item.description && <p className="mt-1 text-sm text-muted-foreground">{item.description}</p>}
+            {item.video_url && (
+              <a
+                href={item.video_url}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-3 inline-flex items-center gap-1.5 text-xs text-primary hover:underline"
+              >
+                Открыть оригинал <ArrowUpRight className="h-3 w-3" />
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 
 
 /* ---------- Services ---------- */
-function Services({ t }: { t: Dict }) {
+function Services({ t, overrides, lang }: { t: Dict; overrides?: SiteContentMap; lang: Lang }) {
+  const custom = overrides?.services ?? [];
+  const items = custom.length > 0
+    ? custom.map((s) => ({ title: s[lang].title, body: s[lang].body, points: s[lang].points }))
+    : t.services.items;
   return (
     <section id="services" className="section-y border-t border-border/60">
       <div className="container-x">
@@ -528,15 +645,15 @@ function Services({ t }: { t: Dict }) {
         </div>
 
         <div className="mt-14 grid gap-4 md:grid-cols-2">
-          {t.services.items.map((s, i) => (
-            <div key={s.title} className="card-surface card-hover p-6 md:p-7">
+          {items.map((s, i) => (
+            <div key={s.title + i} className="card-surface card-hover p-6 md:p-7">
               <div className="flex items-start gap-4">
                 <div className="grid h-11 w-11 shrink-0 place-items-center rounded-lg border border-primary/30 bg-primary/10 text-primary">
-                  {ICONS_SERVICES[i]}
+                  {ICONS_SERVICES[i % ICONS_SERVICES.length]}
                 </div>
                 <div className="min-w-0">
                   <h3 className="font-display text-lg font-semibold">{s.title}</h3>
-                  <p className="mt-1.5 text-sm text-muted-foreground">{s.body}</p>
+                  <p className="mt-1.5 text-sm text-muted-foreground whitespace-pre-line">{s.body}</p>
                   <ul className="mt-4 flex flex-wrap gap-2">
                     {s.points.map((p) => (
                       <li key={p} className="rounded-md border border-border bg-secondary/40 px-2.5 py-1 text-xs text-muted-foreground">
@@ -678,7 +795,7 @@ function Blog({ t }: { t: Dict }) {
 }
 
 /* ---------- Contact ---------- */
-function Contact({ t, lang }: { t: Dict; lang: "en" | "ru" }) {
+function Contact({ t, lang, socials }: { t: Dict; lang: "en" | "ru"; socials?: SocialLink[] }) {
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -756,21 +873,25 @@ function Contact({ t, lang }: { t: Dict; lang: "en" | "ru" }) {
             </a>
           </div>
 
-          <div className="mt-8 flex gap-3">
-            {[
-              { href: "https://t.me/crystalcloudllc_bot", icon: <TelegramIcon />, label: "Telegram" },
-              { href: "https://instagram.com", icon: <Instagram className="h-4 w-4" />, label: "Instagram" },
-              { href: "https://facebook.com", icon: <Facebook className="h-4 w-4" />, label: "Facebook" },
-            ].map((s) => (
+          <div className="mt-8 flex flex-wrap gap-3">
+            {(socials && socials.length > 0
+              ? socials.map((s) => ({ href: s.url, label: s.label || s.platform, icon: socialIcon(s.platform) }))
+              : [
+                  { href: "https://t.me/crystalcloudllc_bot", icon: <TelegramIcon />, label: "Telegram" },
+                  { href: "https://instagram.com", icon: <Instagram className="h-4 w-4" />, label: "Instagram" },
+                  { href: "https://facebook.com", icon: <Facebook className="h-4 w-4" />, label: "Facebook" },
+                ]
+            ).map((s) => (
               <a
-                key={s.label}
+                key={s.label + s.href}
                 href={s.href}
                 target="_blank"
                 rel="noreferrer"
                 aria-label={s.label}
-                className="grid h-10 w-10 place-items-center rounded-lg border border-border text-muted-foreground transition-colors hover:border-primary/40 hover:text-primary"
+                className="inline-flex items-center gap-2 rounded-lg border border-border px-3 h-10 text-sm text-muted-foreground transition-colors hover:border-primary/40 hover:text-primary"
               >
                 {s.icon}
+                <span className="hidden sm:inline">{s.label}</span>
               </a>
             ))}
           </div>
