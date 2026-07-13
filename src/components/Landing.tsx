@@ -784,7 +784,7 @@ function Blog({ t }: { t: Dict }) {
 }
 
 /* ---------- Contact ---------- */
-function Contact({ t, lang }: { t: Dict; lang: "en" | "ru" }) {
+function Contact({ t, lang, socials }: { t: Dict; lang: "en" | "ru"; socials?: SocialLink[] }) {
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
