@@ -365,7 +365,10 @@ function Marquee({ t }: { t: Dict }) {
 }
 
 /* ---------- About ---------- */
-function About({ t }: { t: Dict }) {
+function About({ t, founderImg, overrides, lang }: { t: Dict; founderImg: string; overrides?: SiteContentMap; lang: Lang }) {
+  const ao = overrides?.about_texts?.[lang];
+  const body = ao?.body?.trim() || t.about.body;
+  const values = ao?.values && ao.values.length > 0 ? ao.values : t.about.values;
   return (
     <section id="about" className="section-y">
       <div className="container-x grid gap-12 md:grid-cols-[1fr_1.2fr] md:gap-16">
@@ -391,10 +394,10 @@ function About({ t }: { t: Dict }) {
           <h2 className="mt-4 font-display text-3xl font-semibold leading-tight md:text-5xl">
             {t.about.titleA}<span className="accent-gradient">{t.about.titleAccent}</span>
           </h2>
-          <p className="mt-6 text-base text-muted-foreground md:text-lg">{t.about.body}</p>
+          <p className="mt-6 text-base text-muted-foreground md:text-lg whitespace-pre-line">{body}</p>
 
           <ul className="mt-8 grid gap-3 sm:grid-cols-2">
-            {t.about.values.map((v) => (
+            {values.map((v) => (
               <li key={v} className="flex items-center gap-3 rounded-lg border border-border bg-card/50 px-4 py-3 text-sm">
                 <Check className="h-4 w-4 text-primary" /> {v}
               </li>
