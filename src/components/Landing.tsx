@@ -340,6 +340,17 @@ function SocialLink({ href, icon, label }: { href: string; icon: React.ReactNode
   );
 }
 
+function socialIcon(platform: string) {
+  const p = platform.toLowerCase();
+  if (p.includes("telegram")) return <TelegramIcon />;
+  if (p.includes("instagram")) return <Instagram className="h-4 w-4" />;
+  if (p.includes("facebook")) return <Facebook className="h-4 w-4" />;
+  if (p.includes("tiktok")) return <Music2 className="h-4 w-4" />;
+  if (p.includes("youtube")) return <Youtube className="h-4 w-4" />;
+  if (p.includes("whatsapp") || p.includes("mail")) return <MessageCircle className="h-4 w-4" />;
+  return <ArrowUpRight className="h-4 w-4" />;
+}
+
 function TelegramIcon() {
   return (
     <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current" aria-hidden>
