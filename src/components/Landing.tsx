@@ -1,7 +1,9 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useState, type FormEvent } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { sendContactMessage } from "@/lib/contact.functions";
+import { fetchSiteContent, fetchPortfolio, parseVideoUrl, type SiteContentMap, type PortfolioItem, type SocialLink } from "@/lib/site-content";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -13,6 +15,8 @@ import {
   Menu,
   MessageCircle,
   Minus,
+  Music2,
+  Play,
   Plus,
   Scissors,
   Send,
@@ -22,17 +26,12 @@ import {
   TreePine,
   Truck,
   X,
+  Youtube,
 } from "lucide-react";
-import heroBg from "@/assets/hero-bg.jpg";
-import founderImg from "@/assets/founder.jpg";
-import gallery1 from "@/assets/0708_1.png.asset.json";
-import gallery2 from "@/assets/0708_1_1.png.asset.json";
-import gallery3 from "@/assets/0708_1_3.png.asset.json";
-import gallery4 from "@/assets/0708_1_4.png.asset.json";
+import heroBgDefault from "@/assets/hero-bg.jpg";
+import founderImgDefault from "@/assets/founder.jpg";
 
 import { dicts, pathFor, type Dict, type Lang } from "@/i18n/dict";
-
-const GALLERY_PHOTOS = [gallery1.url, gallery2.url, gallery3.url, gallery4.url];
 
 const ICONS_SKILLS = [
   <TreeDeciduous className="h-5 w-5" key="td" />,
@@ -53,7 +52,12 @@ const ICONS_SERVICES = [
 export function Landing({ lang }: { lang: Lang }) {
   const t = dicts[lang];
 
-  // Auto-detect browser language on first visit (only on the EN homepage)
+  const { data: overrides } = useQuery({ queryKey: ["site_content"], queryFn: fetchSiteContent });
+  const { data: portfolio = [] } = useQuery({ queryKey: ["portfolio"], queryFn: fetchPortfolio });
+
+  const heroBg = overrides?.hero_image?.url || heroBgDefault;
+  const founderImg = overrides?.founder_image?.url || founderImgDefault;
+
   const navigate = useNavigate();
   useEffect(() => {
     if (lang !== "en") return;
@@ -75,17 +79,17 @@ export function Landing({ lang }: { lang: Lang }) {
   return (
     <main className="relative min-h-dvh overflow-x-hidden bg-background text-foreground">
       <Header lang={lang} t={t} />
-      <Hero t={t} />
+      <Hero t={t} heroBg={heroBg} overrides={overrides} lang={lang} />
       <Marquee t={t} />
-      <About t={t} />
+      <About t={t} founderImg={founderImg} overrides={overrides} lang={lang} />
       <Skills t={t} />
       <Projects t={t} />
-      <Gallery t={t} />
-      <Services t={t} />
+      <Portfolio t={t} items={portfolio} />
+      <Services t={t} overrides={overrides} lang={lang} />
       <Testimonials t={t} />
       <FAQ t={t} />
       <Blog t={t} />
-      <Contact t={t} lang={lang} />
+      <Contact t={t} lang={lang} socials={overrides?.contacts_socials} />
       <Footer t={t} lang={lang} />
     </main>
   );
