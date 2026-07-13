@@ -241,7 +241,11 @@ function LangSwitcher({ lang, label }: { lang: Lang; label: string }) {
 }
 
 /* ---------- Hero ---------- */
-function Hero({ t }: { t: Dict }) {
+function Hero({ t, heroBg, overrides, lang }: { t: Dict; heroBg: string; overrides?: SiteContentMap; lang: Lang }) {
+  const ho = overrides?.hero_texts?.[lang];
+  const titleA = ho?.titleA?.trim() || t.hero.titleA;
+  const titleB = ho?.titleB?.trim() || t.hero.titleB;
+  const subtitle = ho?.subtitle?.trim();
   return (
     <section id="top" className="relative isolate overflow-hidden pb-24 pt-32 md:pb-32 md:pt-40">
       <div className="absolute inset-0 -z-10">
@@ -270,16 +274,20 @@ function Hero({ t }: { t: Dict }) {
           </div>
 
           <h1 className="font-display text-4xl font-semibold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl">
-            <span className="text-gradient">{t.hero.titleA}</span>
+            <span className="text-gradient">{titleA}</span>
             <br />
-            <span className="accent-gradient">{t.hero.titleB}</span>
+            <span className="accent-gradient">{titleB}</span>
           </h1>
 
-          <p className="mx-auto mt-6 max-w-2xl text-base text-muted-foreground md:text-lg">
-            {t.hero.subtitleA}
-            <span className="text-foreground">{t.hero.subtitleFounder}</span>
-            {t.hero.subtitleB}
-          </p>
+          {subtitle ? (
+            <p className="mx-auto mt-6 max-w-2xl text-base text-muted-foreground md:text-lg">{subtitle}</p>
+          ) : (
+            <p className="mx-auto mt-6 max-w-2xl text-base text-muted-foreground md:text-lg">
+              {t.hero.subtitleA}
+              <span className="text-foreground">{t.hero.subtitleFounder}</span>
+              {t.hero.subtitleB}
+            </p>
+          )}
 
           <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <a
