@@ -26,10 +26,31 @@ export const Route = createFileRoute("/")({
         { name: "twitter:description", content: s.description },
       ],
       links: [
-        { rel: "canonical", href: "/" },
-        { rel: "alternate", hrefLang: "en", href: "/" },
-        { rel: "alternate", hrefLang: "ru", href: "/ru" },
-        { rel: "alternate", hrefLang: "x-default", href: "/" },
+        { rel: "canonical", href: "https://crystal-cloud-shine.lovable.app/" },
+        { rel: "alternate", hrefLang: "en", href: "https://crystal-cloud-shine.lovable.app/" },
+        { rel: "alternate", hrefLang: "ru", href: "https://crystal-cloud-shine.lovable.app/ru" },
+        { rel: "alternate", hrefLang: "x-default", href: "https://crystal-cloud-shine.lovable.app/" },
+      ],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            name: "Crystal Cloud LLC",
+            image: "https://crystal-cloud-shine.lovable.app/og-image.jpg",
+            telephone: "+1-916-890-8080",
+            url: "https://crystal-cloud-shine.lovable.app/",
+            priceRange: "$$",
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: "Sacramento",
+              addressRegion: "CA",
+              addressCountry: "US",
+            },
+            areaServed: "Sacramento, CA",
+          }),
+        },
       ],
     };
   },
