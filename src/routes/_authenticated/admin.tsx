@@ -10,6 +10,7 @@ import {
   type PortfolioItem,
   type SocialLink,
   type ServiceItem,
+  type SeoContent,
 } from "@/lib/site-content";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -114,12 +115,14 @@ function AdminPage() {
             <TabsTrigger value="about">Про меня</TabsTrigger>
             <TabsTrigger value="contacts">Контакты</TabsTrigger>
             <TabsTrigger value="portfolio">Портфолио</TabsTrigger>
+            <TabsTrigger value="seo">SEO</TabsTrigger>
           </TabsList>
           <TabsContent value="hero"><HeroEditor /></TabsContent>
           <TabsContent value="services"><ServicesEditor /></TabsContent>
           <TabsContent value="about"><AboutEditor /></TabsContent>
           <TabsContent value="contacts"><ContactsEditor /></TabsContent>
           <TabsContent value="portfolio"><PortfolioEditor /></TabsContent>
+          <TabsContent value="seo"><SeoEditor /></TabsContent>
         </Tabs>
       </main>
     </div>
