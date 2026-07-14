@@ -19,7 +19,7 @@ export const Route = createFileRoute("/")({
         { name: "description", content: s.description },
         { property: "og:title", content: s.title },
         { property: "og:description", content: s.description },
-        { property: "og:url", content: "/" },
+        { property: "og:url", content: "https://crystal-cloud-shine.lovable.app/" },
         { property: "og:locale", content: "en_US" },
         { property: "og:locale:alternate", content: "ru_RU" },
         { name: "twitter:title", content: s.title },
