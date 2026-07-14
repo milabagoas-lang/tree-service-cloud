@@ -14,6 +14,9 @@ export type AboutTexts = {
   en: { body: string; values: string[] };
 };
 
+export type SeoLang = { title: string; description: string };
+export type SeoContent = { ru: SeoLang; en: SeoLang };
+
 export type SiteContentMap = {
   hero_image?: { url: string };
   founder_image?: { url: string };
@@ -21,6 +24,7 @@ export type SiteContentMap = {
   about_texts?: AboutTexts;
   services?: ServiceItem[];
   contacts_socials?: SocialLink[];
+  seo?: SeoContent;
 };
 
 export async function fetchSiteContent(): Promise<SiteContentMap> {
