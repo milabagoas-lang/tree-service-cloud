@@ -10,6 +10,7 @@ import {
   type PortfolioItem,
   type SocialLink,
   type ServiceItem,
+  type SeoContent,
 } from "@/lib/site-content";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -114,12 +115,14 @@ function AdminPage() {
             <TabsTrigger value="about">Про меня</TabsTrigger>
             <TabsTrigger value="contacts">Контакты</TabsTrigger>
             <TabsTrigger value="portfolio">Портфолио</TabsTrigger>
+            <TabsTrigger value="seo">SEO</TabsTrigger>
           </TabsList>
           <TabsContent value="hero"><HeroEditor /></TabsContent>
           <TabsContent value="services"><ServicesEditor /></TabsContent>
           <TabsContent value="about"><AboutEditor /></TabsContent>
           <TabsContent value="contacts"><ContactsEditor /></TabsContent>
           <TabsContent value="portfolio"><PortfolioEditor /></TabsContent>
+          <TabsContent value="seo"><SeoEditor /></TabsContent>
         </Tabs>
       </main>
     </div>
@@ -641,6 +644,104 @@ function UploadInput({ onFile, loading }: { onFile: (f: File) => void; loading: 
         }}
       />
     </label>
+  );
+}
+
+/* ---------------- SEO ---------------- */
+const SEO_FALLBACK: SeoContent = {
+  en: {
+    title: "Crystal Cloud LLC — Tree Removal & Arborist in Sacramento, CA",
+    description:
+      "Licensed & insured tree removal, pruning, palm cleaning and emergency storm cleanup in Sacramento, CA. Free same-day estimates. Call 916-890-8080.",
+  },
+  ru: {
+    title: "CRYSTAL CLOUD LLC — Спил и обрезка деревьев в Sacramento",
+    description:
+      "Безопасное удаление деревьев любой сложности, чистка пальм, обрезка веток и услуги арбориста в Sacramento, CA. Бесплатная оценка. 📞 916-890-8080.",
+  },
+};
+
+function SeoEditor() {
+  const { data, isLoading } = useContent();
+  const save = useSaveContent();
+  const [seo, setSeo] = useState<SeoContent>(SEO_FALLBACK);
+
+  useEffect(() => {
+    if (data?.seo) {
+      setSeo({
+        en: { title: data.seo.en?.title ?? "", description: data.seo.en?.description ?? "" },
+        ru: { title: data.seo.ru?.title ?? "", description: data.seo.ru?.description ?? "" },
+      });
+    }
+  }, [data]);
+
+  if (isLoading) return <Skeleton />;
+
+  const update = (lng: "en" | "ru", field: "title" | "description", v: string) =>
+    setSeo((s) => ({ ...s, [lng]: { ...s[lng], [field]: v } }));
+
+  const LIMITS = { title: 60, description: 160 };
+
+  return (
+    <div className="grid gap-6 lg:grid-cols-2">
+      {(["ru", "en"] as const).map((lng) => (
+        <Card key={lng} className="p-6">
+          <h3 className="mb-1 font-display text-lg font-semibold">
+            SEO — {lng === "ru" ? "Русская версия (/ru)" : "English version (/)"}
+          </h3>
+          <p className="mb-4 text-xs text-muted-foreground">
+            Плейсхолдеры показывают значения по умолчанию — если оставить поле пустым, используется дефолт.
+          </p>
+
+          <Label className="text-xs">
+            Title (до {LIMITS.title} символов) — {seo[lng].title.length}/{LIMITS.title}
+          </Label>
+          <Input
+            className="mt-1"
+            maxLength={LIMITS.title}
+            placeholder={SEO_FALLBACK[lng].title}
+            value={seo[lng].title}
+            onChange={(e) => update(lng, "title", e.target.value)}
+          />
+
+          <Label className="mt-4 text-xs">
+            Description (до {LIMITS.description} символов) — {seo[lng].description.length}/{LIMITS.description}
+          </Label>
+          <Textarea
+            className="mt-1"
+            rows={4}
+            maxLength={LIMITS.description}
+            placeholder={SEO_FALLBACK[lng].description}
+            value={seo[lng].description}
+            onChange={(e) => update(lng, "description", e.target.value)}
+          />
+        </Card>
+      ))}
+
+      <div className="lg:col-span-2 flex items-center gap-3">
+        <Button
+          onClick={() => {
+            const clean: SeoContent = {
+              en: {
+                title: seo.en.title.trim().slice(0, 60),
+                description: seo.en.description.trim().slice(0, 160),
+              },
+              ru: {
+                title: seo.ru.title.trim().slice(0, 60),
+                description: seo.ru.description.trim().slice(0, 160),
+              },
+            };
+            save.mutate({ key: "seo", value: clean });
+          }}
+          disabled={save.isPending}
+        >
+          {save.isPending ? "Сохранение…" : "Сохранить SEO"}
+        </Button>
+        <p className="text-xs text-muted-foreground">
+          После сохранения обновите страницу сайта (Ctrl+F5) — новые метаданные будут в исходном коде страницы.
+        </p>
+      </div>
+    </div>
   );
 }
 

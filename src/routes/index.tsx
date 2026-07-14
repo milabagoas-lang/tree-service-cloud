@@ -1,24 +1,36 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Landing } from "@/components/Landing";
-import { en } from "@/i18n/dict";
+import { getSeo, SEO_DEFAULTS } from "@/lib/seo.functions";
 
 export const Route = createFileRoute("/")({
   component: () => <Landing lang="en" />,
-  head: () => ({
-    meta: [
-      { title: en.meta.title },
-      { name: "description", content: en.meta.description },
-      { property: "og:title", content: en.meta.ogTitle },
-      { property: "og:description", content: en.meta.ogDescription },
-      { property: "og:url", content: "/" },
-      { property: "og:locale", content: "en_US" },
-      { property: "og:locale:alternate", content: "ru_RU" },
-    ],
-    links: [
-      { rel: "canonical", href: "/" },
-      { rel: "alternate", hrefLang: "en", href: "/" },
-      { rel: "alternate", hrefLang: "ru", href: "/ru" },
-      { rel: "alternate", hrefLang: "x-default", href: "/" },
-    ],
-  }),
+  loader: async () => {
+    try {
+      return { seo: await getSeo() };
+    } catch {
+      return { seo: SEO_DEFAULTS };
+    }
+  },
+  head: ({ loaderData }) => {
+    const s = loaderData?.seo?.en ?? SEO_DEFAULTS.en;
+    return {
+      meta: [
+        { title: s.title },
+        { name: "description", content: s.description },
+        { property: "og:title", content: s.title },
+        { property: "og:description", content: s.description },
+        { property: "og:url", content: "/" },
+        { property: "og:locale", content: "en_US" },
+        { property: "og:locale:alternate", content: "ru_RU" },
+        { name: "twitter:title", content: s.title },
+        { name: "twitter:description", content: s.description },
+      ],
+      links: [
+        { rel: "canonical", href: "/" },
+        { rel: "alternate", hrefLang: "en", href: "/" },
+        { rel: "alternate", hrefLang: "ru", href: "/ru" },
+        { rel: "alternate", hrefLang: "x-default", href: "/" },
+      ],
+    };
+  },
 });
