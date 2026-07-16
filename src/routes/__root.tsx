@@ -74,7 +74,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { name: "theme-color", content: "#0A0F0D" },
-      { title: "CRYSTAL CLOUD LLC — Профессиональный спил и обрезка деревьев" },
+      { title: "TREE SERVICE — Профессиональный спил и обрезка деревьев" },
       {
         name: "description",
         content:
@@ -82,7 +82,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { name: "author", content: "Crystal Cloud LLC" },
       { property: "og:site_name", content: "Crystal Cloud LLC" },
-      { property: "og:title", content: "CRYSTAL CLOUD LLC — Профессиональный спил и обрезка деревьев" },
+      { property: "og:title", content: "TREE SERVICE — Профессиональный спил и обрезка деревьев" },
       {
         property: "og:description",
         content:
@@ -90,7 +90,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "CRYSTAL CLOUD LLC — Профессиональный спил и обрезка деревьев" },
+      { name: "twitter:title", content: "TREE SERVICE — Профессиональный спил и обрезка деревьев" },
       {
         name: "twitter:description",
         content: "Безопасное удаление деревьев любой сложности, чистка пальм, обрезка веток над домом и услуги арбориста в Sacramento. 📞 916-890-8080",
