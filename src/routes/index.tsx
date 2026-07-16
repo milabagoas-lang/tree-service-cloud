@@ -18,6 +18,7 @@ export const Route = createFileRoute("/")({
       meta: [
         { title: s.title },
         { name: "description", content: s.description },
+        { name: "google-site-verification", content: "c6ARU7HYKJAgbsklk5oxiIOkf-KA_myKmfS9iYsrzcc" },
         { property: "og:title", content: s.title },
         { property: "og:description", content: s.description },
         { property: "og:url", content: "https://crystal-cloud-shine.lovable.app/" },
