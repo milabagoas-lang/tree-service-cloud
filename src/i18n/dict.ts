@@ -233,7 +233,7 @@ export const en = {
     titleAccent: "estimate today.",
     subtitle:
       "Reply within one business day. For urgent tree emergencies, message us on Telegram — we monitor it around the clock.",
-    telegramNote: "@crystalcloudllc_bot · fastest reply",
+    telegramNote: "@treeservicebiz_bot · fastest reply",
     emailNote: "Free estimates",
     form: {
       name: "Name",
@@ -254,7 +254,7 @@ export const en = {
       "Licensed and insured tree removal, pruning, and palm care in Sacramento and throughout California. Founded and led by Andrii Biedariev.",
     navigate: "Navigate",
     contact: "Contact",
-    telegram: "@crystalcloudllc_bot on Telegram",
+    telegram: "@treeservicebiz_bot on Telegram",
     rights: "All rights reserved.",
     ops: "All systems operational",
   },
@@ -487,7 +487,7 @@ export const ru: Dict = {
     titleAccent: "оценку сегодня.",
     subtitle:
       "Отвечаем в течение одного рабочего дня. Срочные случаи — в Telegram, мы на связи круглосуточно.",
-    telegramNote: "@crystalcloudllc_bot · самый быстрый ответ",
+    telegramNote: "@treeservicebiz_bot · самый быстрый ответ",
     emailNote: "Бесплатные оценки",
     form: {
       name: "Имя",
@@ -508,7 +508,7 @@ export const ru: Dict = {
       "Лицензированный и застрахованный спил деревьев, обрезка и чистка пальм в Сакраменто и по всей Калифорнии. Основана и ведётся Андреем Бедаревым.",
     navigate: "Навигация",
     contact: "Контакты",
-    telegram: "@crystalcloudllc_bot в Telegram",
+    telegram: "@treeservicebiz_bot в Telegram",
     rights: "Все права защищены.",
     ops: "Все системы работают",
   },
