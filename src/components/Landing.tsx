@@ -976,7 +976,7 @@ function Footer({ t, lang }: { t: Dict; lang: Lang }) {
               <div className="grid h-8 w-8 place-items-center rounded-md border border-primary/40 bg-primary/10">
                 <Sparkles className="h-4 w-4 text-primary" />
               </div>
-              <span className="font-display text-sm font-semibold">Crystal Cloud LLC</span>
+              <span className="font-display text-sm font-semibold">TREE SERVICE</span>
             </div>
             <p className="mt-4 max-w-sm text-sm text-muted-foreground">{t.footer.tagline}</p>
             <div className="mt-4">
