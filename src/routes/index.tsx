@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Landing } from "@/components/Landing";
 import { getSeo, SEO_DEFAULTS } from "@/lib/seo.functions";
 
+
 export const Route = createFileRoute("/")({
   component: () => <Landing lang="en" />,
   loader: async () => {
@@ -17,6 +18,7 @@ export const Route = createFileRoute("/")({
       meta: [
         { title: s.title },
         { name: "description", content: s.description },
+        { name: "google-site-verification", content: "c6ARU7HYKJAgbsklk5oxiIOkf-KA_myKmfS9iYsrzcc" },
         { property: "og:title", content: s.title },
         { property: "og:description", content: s.description },
         { property: "og:url", content: "https://crystal-cloud-shine.lovable.app/" },
