@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Landing } from "@/components/Landing";
 import { getSeo, SEO_DEFAULTS } from "@/lib/seo.functions";
 
+
 export const Route = createFileRoute("/")({
   component: () => <Landing lang="en" />,
   loader: async () => {
