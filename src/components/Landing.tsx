@@ -11,7 +11,7 @@ import {
   Facebook,
   Instagram,
   Leaf,
-  Mail,
+  Phone,
   Menu,
   MessageCircle,
   Minus,
@@ -859,14 +859,14 @@ function Contact({ t, lang, socials }: { t: Dict; lang: "en" | "ru"; socials?: S
               <ArrowUpRight className="h-5 w-5 text-primary transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </a>
 
-            <a href="mailto:hello@crystalcloud.dev" className="flex items-center justify-between rounded-xl border border-border bg-card/40 px-5 py-4 hover:bg-card">
+            <a href="tel:916-890-8080" className="flex items-center justify-between rounded-xl border border-border bg-card/40 px-5 py-4 hover:bg-card">
               <div className="flex items-center gap-3">
                 <div className="grid h-10 w-10 place-items-center rounded-lg border border-border">
-                  <Mail className="h-5 w-5 text-muted-foreground" />
+                  <Phone className="h-5 w-5 text-muted-foreground" />
                 </div>
                 <div>
-                  <div className="font-medium">hello@crystalcloud.dev</div>
-                  <div className="text-xs text-muted-foreground">{t.contact.emailNote}</div>
+                  <div className="font-medium">916-890-8080</div>
+                  <div className="text-xs text-muted-foreground">{t.contact.phoneNote}</div>
                 </div>
               </div>
               <ArrowUpRight className="h-5 w-5 text-muted-foreground" />
@@ -1004,7 +1004,7 @@ function Footer({ t, lang }: { t: Dict; lang: Lang }) {
               {t.footer.contact}
             </div>
             <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-              <li>hello@crystalcloud.dev</li>
+              <li><a href="tel:916-890-8080" className="hover:text-foreground">916-890-8080</a></li>
               <li>{t.footer.telegram}</li>
             </ul>
           </div>
