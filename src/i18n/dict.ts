@@ -234,7 +234,7 @@ export const en = {
     subtitle:
       "Reply within one business day. For urgent tree emergencies, message us on Telegram — we monitor it around the clock.",
     telegramNote: "@treeservicebiz_bot · fastest reply",
-    emailNote: "Free estimates",
+    phoneNote: "Free estimates",
     form: {
       name: "Name",
       namePh: "Your name",
@@ -488,7 +488,7 @@ export const ru: Dict = {
     subtitle:
       "Отвечаем в течение одного рабочего дня. Срочные случаи — в Telegram, мы на связи круглосуточно.",
     telegramNote: "@treeservicebiz_bot · самый быстрый ответ",
-    emailNote: "Бесплатные оценки",
+    phoneNote: "Бесплатные оценки",
     form: {
       name: "Имя",
       namePh: "Ваше имя",
