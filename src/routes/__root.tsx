@@ -119,7 +119,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           areaServed: "Sacramento, CA",
           description:
             "Licensed & insured tree removal, pruning, palm cleaning and emergency storm cleanup in Sacramento, CA.",
-          sameAs: ["https://t.me/crystalcloudllc_bot"],
+          sameAs: ["https://t.me/treeservicebiz_bot"],
         }),
       },
     ],

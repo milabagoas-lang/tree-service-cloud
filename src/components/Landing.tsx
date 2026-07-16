@@ -306,7 +306,7 @@ function Hero({ t, heroBg, overrides, lang }: { t: Dict; heroBg: string; overrid
           </div>
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs text-muted-foreground">
-            <SocialLink href="https://t.me/crystalcloudllc_bot" icon={<TelegramIcon />} label="Telegram" />
+            <SocialLink href="https://t.me/treeservicebiz_bot" icon={<TelegramIcon />} label="Telegram" />
             <SocialLink href="https://instagram.com" icon={<Instagram className="h-4 w-4" />} label="Instagram" />
             <SocialLink href="https://facebook.com" icon={<Facebook className="h-4 w-4" />} label="Facebook" />
           </div>
@@ -842,7 +842,7 @@ function Contact({ t, lang, socials }: { t: Dict; lang: "en" | "ru"; socials?: S
 
           <div className="mt-8 space-y-3">
             <a
-              href="https://t.me/crystalcloudllc_bot"
+              href="https://t.me/treeservicebiz_bot"
               target="_blank"
               rel="noreferrer"
               className="group flex items-center justify-between rounded-xl border border-primary/30 bg-primary/10 px-5 py-4 transition-colors hover:bg-primary/20"
@@ -877,7 +877,7 @@ function Contact({ t, lang, socials }: { t: Dict; lang: "en" | "ru"; socials?: S
             {(socials && socials.length > 0
               ? socials.map((s) => ({ href: s.url, label: s.label || s.platform, icon: socialIcon(s.platform) }))
               : [
-                  { href: "https://t.me/crystalcloudllc_bot", icon: <TelegramIcon />, label: "Telegram" },
+                  { href: "https://t.me/treeservicebiz_bot", icon: <TelegramIcon />, label: "Telegram" },
                   { href: "https://instagram.com", icon: <Instagram className="h-4 w-4" />, label: "Instagram" },
                   { href: "https://facebook.com", icon: <Facebook className="h-4 w-4" />, label: "Facebook" },
                 ]
