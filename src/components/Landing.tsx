@@ -131,7 +131,7 @@ function Header({ lang, t }: { lang: Lang; t: Dict }) {
             <Sparkles className="h-4 w-4 text-primary" />
           </div>
           <span className="font-display text-sm font-semibold tracking-tight">
-            Crystal Cloud<span className="text-primary">.</span>
+            TREE SERVICE<span className="text-primary">.</span>
           </span>
         </a>
 
