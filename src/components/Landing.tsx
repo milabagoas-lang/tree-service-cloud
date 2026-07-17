@@ -278,7 +278,7 @@ function Hero({ t, heroBg, overrides, lang }: { t: Dict; heroBg: string; overrid
             {titleB ? (
               <>
                 <br />
-                <span className="text-white">{titleB}</span>
+                <span className="text-emerald-500">{titleB}</span>
               </>
             ) : null}
           </h1>
