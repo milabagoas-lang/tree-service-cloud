@@ -8,10 +8,10 @@ export type Dict = typeof en;
 
 export const en = {
   meta: {
-    title: "Crystal Cloud LLC — Tree Removal & Arborist Services in Sacramento, CA",
+    title: "TREE SERVICE — Tree Removal & Arborist Services in Sacramento, CA",
     description:
       "Licensed and insured tree removal, branch pruning, palm cleaning, and tree care in Sacramento and throughout California. Free same-day estimates.",
-    ogTitle: "Crystal Cloud LLC — Tree Removal & Arborist Services",
+    ogTitle: "TREE SERVICE — Tree Removal & Arborist Services",
     ogDescription:
       "Safe tree removal, pruning, palm cleaning, and emergency storm cleanup in Sacramento and all of California. Licensed & insured.",
   },
@@ -31,7 +31,7 @@ export const en = {
     titleA: "Safe tree removal",
     titleB: "any difficulty, done right.",
     subtitleA:
-      "Crystal Cloud LLC provides professional arborist services in Sacramento and across California. Founded by ",
+      "TREE SERVICE provides professional arborist services in Sacramento and across California. Founded by ",
     subtitleFounder: "Andrii Biedariev",
     subtitleB: " — a licensed, insured crew ready for residential and commercial jobs.",
     ctaPrimary: "Get a free estimate",
@@ -51,7 +51,7 @@ export const en = {
     eyebrow: "About",
     titleA: "A team that protects ",
     titleAccent: "your property and trees.",
-    body: "Crystal Cloud LLC is a licensed and insured tree service company based in Sacramento, serving the entire state of California. We specialize in safe tree removals, precision pruning, palm cleaning, stump grinding, and emergency storm response. Every job is planned to protect your home, landscape, and family.",
+    body: "TREE SERVICE is a licensed and insured tree service company based in Sacramento, serving the entire state of California. We specialize in safe tree removals, precision pruning, palm cleaning, stump grinding, and emergency storm response. Every job is planned to protect your home, landscape, and family.",
     values: [
       "Licensed & insured",
       "Zero-damage approach",
@@ -196,7 +196,7 @@ export const en = {
     items: [
       {
         q: "Are you licensed and insured?",
-        a: "Yes. Crystal Cloud LLC carries full liability insurance and all required California contractor licensing for tree work.",
+        a: "Yes. TREE SERVICE carries full liability insurance and all required California contractor licensing for tree work.",
       },
       {
         q: "Do you provide free estimates?",
@@ -262,10 +262,10 @@ export const en = {
 
 export const ru: Dict = {
   meta: {
-    title: "Crystal Cloud LLC — Спил деревьев и услуги арбориста в Сакраменто, Калифорния",
+    title: "TREE SERVICE — Спил деревьев и услуги арбориста в Сакраменто, Калифорния",
     description:
       "Лицензированная и застрахованная команда. Спил деревьев, обрезка веток, чистка пальм, уход за деревьями в Сакраменто и по всей Калифорнии. Бесплатные оценки в тот же день.",
-    ogTitle: "Crystal Cloud LLC — Спил деревьев и услуги арбориста",
+    ogTitle: "TREE SERVICE — Спил деревьев и услуги арбориста",
     ogDescription:
       "Безопасный спил деревьев, обрезка, чистка пальм и устранение последствий штормов в Сакраменто и по всей Калифорнии. Лицензия и страховка.",
   },
@@ -285,7 +285,7 @@ export const ru: Dict = {
     titleA: "Безопасный спил деревьев",
     titleB: "любой сложности.",
     subtitleA:
-      "Crystal Cloud LLC оказывает профессиональные услуги арбориста в Сакраменто и по всей Калифорнии. Основана ",
+      "TREE SERVICE оказывает профессиональные услуги арбориста в Сакраменто и по всей Калифорнии. Основана ",
     subtitleFounder: "Андреем Бедаревым",
     subtitleB: " — лицензированная и застрахованная бригада для частных и коммерческих объектов.",
     ctaPrimary: "Бесплатная оценка",
@@ -305,7 +305,7 @@ export const ru: Dict = {
     eyebrow: "О нас",
     titleA: "Команда, которая защищает ",
     titleAccent: "вашу недвижимость и деревья.",
-    body: "Crystal Cloud LLC — лицензированная и застрахованная компания по обслуживанию деревьев из Сакраменто, работающая по всему штату Калифорния. Мы специализируемся на безопасном спиле деревьев, точечной обрезке, чистке пальм, удалении пней и экстренном реагировании на штормы. Каждая работа планируется так, чтобы защитить ваш дом, ландшафт и семью.",
+    body: "TREE SERVICE — лицензированная и застрахованная компания по обслуживанию деревьев из Сакраменто, работающая по всему штату Калифорния. Мы специализируемся на безопасном спиле деревьев, точечной обрезке, чистке пальм, удалении пней и экстренном реагировании на штормы. Каждая работа планируется так, чтобы защитить ваш дом, ландшафт и семью.",
     values: [
       "Лицензия и страховка",
       "Подход без повреждений",
@@ -450,7 +450,7 @@ export const ru: Dict = {
     items: [
       {
         q: "У вас есть лицензия и страховка?",
-        a: "Да. Crystal Cloud LLC имеет полное страхование ответственности и все необходимые лицензии подрядчика Калифорнии для работы с деревьями.",
+        a: "Да. TREE SERVICE имеет полное страхование ответственности и все необходимые лицензии подрядчика Калифорнии для работы с деревьями.",
       },
       {
         q: "Вы даёте бесплатные оценки?",

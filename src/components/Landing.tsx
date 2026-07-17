@@ -1011,7 +1011,7 @@ function Footer({ t, lang }: { t: Dict; lang: Lang }) {
         </div>
 
         <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row sm:items-center">
-          <div>© {new Date().getFullYear()} Crystal Cloud LLC. {t.footer.rights}</div>
+          <div>© {new Date().getFullYear()} TREE SERVICE. {t.footer.rights}</div>
           <div className="flex items-center gap-2">
             <span className="h-1.5 w-1.5 rounded-full bg-primary" />
             {t.footer.ops}
