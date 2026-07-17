@@ -243,9 +243,15 @@ function LangSwitcher({ lang, label }: { lang: Lang; label: string }) {
 /* ---------- Hero ---------- */
 function Hero({ t, heroBg, overrides, lang }: { t: Dict; heroBg: string; overrides?: SiteContentMap; lang: Lang }) {
   const ho = overrides?.hero_texts?.[lang];
-  const titleA = ho?.titleA?.trim() || t.hero.titleA;
+  let titleA = ho?.titleA?.trim() || t.hero.titleA;
   const titleB = ho?.titleB?.trim() || t.hero.titleB;
   const subtitle = ho?.subtitle?.trim();
+
+  if (titleB && titleA.toLocaleLowerCase().includes(titleB.toLocaleLowerCase())) {
+    const duplicate = new RegExp(`\\s*${escapeRegExp(titleB)}[\\s.!?,—-]*$`, "i");
+    titleA = titleA.replace(duplicate, "").trim() || titleA;
+  }
+
   return (
     <section id="top" className="relative isolate overflow-hidden pb-24 pt-32 md:pb-32 md:pt-40">
       <div className="absolute inset-0 -z-10">
@@ -341,6 +347,10 @@ function Hero({ t, heroBg, overrides, lang }: { t: Dict; heroBg: string; overrid
       </div>
     </section>
   );
+}
+
+function escapeRegExp(value: string) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
 function SocialLink({ href, icon, label }: { href: string; icon: React.ReactNode; label: string }) {
