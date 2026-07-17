@@ -80,8 +80,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "Безопасное удаление деревьев любой сложности, чистка пальм, обрезка веток над домом и услуги арбориста в Sacramento. 📞 916-890-8080",
       },
-      { name: "author", content: "Crystal Cloud LLC" },
-      { property: "og:site_name", content: "Crystal Cloud LLC" },
+      { name: "author", content: "TREE SERVICE" },
+      { property: "og:site_name", content: "TREE SERVICE" },
       { property: "og:title", content: "TREE SERVICE — Профессиональный спил и обрезка деревьев" },
       {
         property: "og:description",
@@ -113,7 +113,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Organization",
-          name: "Crystal Cloud LLC",
+          name: "TREE SERVICE",
           url: "https://crystal-cloud-shine.lovable.app",
           telephone: "+1-916-890-8080",
           areaServed: "Sacramento, CA",

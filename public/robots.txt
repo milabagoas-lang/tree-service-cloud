@@ -3,4 +3,4 @@ Allow: /
 Disallow: /admin
 Disallow: /auth
 
-Sitemap: https://crystal-cloud-shine.lovable.app/sitemap.xml
+Sitemap: https://treeservicebiz.com/sitemap.xml

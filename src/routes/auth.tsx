@@ -8,7 +8,7 @@ import { Sparkles } from "lucide-react";
 export const Route = createFileRoute("/auth")({
   component: AuthPage,
   head: () => ({
-    meta: [{ title: "Вход · Crystal Cloud LLC" }],
+    meta: [{ title: "Вход · TREE SERVICE" }],
   }),
   beforeLoad: async () => {
     if (typeof window === "undefined") return;
