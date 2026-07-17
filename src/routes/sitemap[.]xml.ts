@@ -1,3 +1,4 @@
+import { createFileRoute } from '@tanstack/react-router'
 import { createFileRoute } from "@tanstack/react-start";
 
 // TODO: replace with your project URL once a project name or custom domain is set.
