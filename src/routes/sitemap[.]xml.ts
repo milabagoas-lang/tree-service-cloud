@@ -1,3 +1,4 @@
+import { createFileRoute } from '@tanstack/react-router'
 import { createFileRoute } from "@tanstack/react-start";
 
 const BASE_URL = "https://tree-service-cloud.lovable.app";
