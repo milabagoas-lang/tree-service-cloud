@@ -306,9 +306,21 @@ function Hero({ t, heroBg, overrides, lang }: { t: Dict; heroBg: string; overrid
           </div>
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs text-muted-foreground">
-            <SocialLink href="https://t.me/treeservicebiz_bot" icon={<TelegramIcon />} label="Telegram" />
-            <SocialLink href="https://instagram.com" icon={<Instagram className="h-4 w-4" />} label="Instagram" />
-            <SocialLink href="https://facebook.com" icon={<Facebook className="h-4 w-4" />} label="Facebook" />
+            {(overrides?.contacts_socials && overrides.contacts_socials.length > 0
+              ? overrides.contacts_socials
+              : [
+                  { platform: "Telegram", url: "https://t.me/treeservicebiz_bot" },
+                  { platform: "Instagram", url: "https://instagram.com" },
+                  { platform: "Facebook", url: "https://facebook.com" },
+                ]
+            ).map((s) => (
+              <SocialLink
+                key={s.platform + s.url}
+                href={s.url}
+                icon={socialIcon(s.platform)}
+                label={s.label || s.platform}
+              />
+            ))}
           </div>
         </div>
 
