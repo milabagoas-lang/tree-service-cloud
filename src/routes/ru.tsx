@@ -38,7 +38,7 @@ export const Route = createFileRoute("/ru")({
           children: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "LocalBusiness",
-            name: "Crystal Cloud LLC",
+            name: "TREE SERVICE",
             image: "https://crystal-cloud-shine.lovable.app/og-image.jpg",
             telephone: "+1-916-890-8080",
             url: "https://crystal-cloud-shine.lovable.app/ru",

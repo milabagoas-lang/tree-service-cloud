@@ -1,8 +1,8 @@
-# Crystal Cloud LLC
+# TREE SERVICE
 
 > Licensed & insured tree removal, pruning, palm cleaning and emergency storm cleanup in Sacramento, CA. Free same-day estimates. Call 916-890-8080.
 
-Crystal Cloud LLC is a Sacramento-based arborist and tree service company. The site presents services, portfolio of completed jobs, information about the founder, and contact options (phone and Telegram bot).
+TREE SERVICE is a Sacramento-based arborist and tree service company. The site presents services, portfolio of completed jobs, information about the founder, and contact options (phone and Telegram bot).
 
 ## Pages
 - [Home (English)](/): Services overview, portfolio, about the founder, contact form.

@@ -31,7 +31,7 @@ import { Toaster } from "@/components/ui/sonner";
 
 export const Route = createFileRoute("/_authenticated/admin")({
   component: AdminPage,
-  head: () => ({ meta: [{ title: "Админ-панель · Crystal Cloud" }] }),
+  head: () => ({ meta: [{ title: "Админ-панель · TREE SERVICE" }] }),
 });
 
 function AdminPage() {
@@ -650,7 +650,7 @@ function UploadInput({ onFile, loading }: { onFile: (f: File) => void; loading: 
 /* ---------------- SEO ---------------- */
 const SEO_FALLBACK: SeoContent = {
   en: {
-    title: "Crystal Cloud LLC — Tree Removal & Arborist in Sacramento, CA",
+    title: "TREE SERVICE — Tree Removal & Arborist in Sacramento, CA",
     description:
       "Licensed & insured tree removal, pruning, palm cleaning and emergency storm cleanup in Sacramento, CA. Free same-day estimates. Call 916-890-8080.",
   },

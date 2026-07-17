@@ -7,7 +7,7 @@ export type SeoContent = { ru: SeoLang; en: SeoLang };
 
 export const SEO_DEFAULTS: SeoContent = {
   en: {
-    title: "Crystal Cloud LLC — Tree Removal & Arborist in Sacramento, CA",
+    title: "TREE SERVICE — Tree Removal & Arborist in Sacramento, CA",
     description:
       "Licensed & insured tree removal, pruning, palm cleaning and emergency storm cleanup in Sacramento, CA. Free same-day estimates. Call 916-890-8080.",
   },
