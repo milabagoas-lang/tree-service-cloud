@@ -273,10 +273,14 @@ function Hero({ t, heroBg, overrides, lang }: { t: Dict; heroBg: string; overrid
             </span>
           </div>
 
-          <h1 className="font-display text-4xl font-semibold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl">
-            <span className="text-gradient">{titleA}</span>
-            <br />
-            <span className="accent-gradient">{titleB}</span>
+          <h1 className="font-display text-4xl font-semibold leading-[1.05] tracking-tight text-white sm:text-6xl md:text-7xl">
+            <span className="text-white">{titleA}</span>
+            {titleB ? (
+              <>
+                <br />
+                <span className="text-white">{titleB}</span>
+              </>
+            ) : null}
           </h1>
 
           {subtitle ? (
