@@ -1,9 +1,6 @@
-import { createFileRoute } from '@tanstack/react-router'
-
 import { createFileRoute } from "@tanstack/react-start";
 
-// TODO: replace with your project URL once a project name or custom domain is set.
-const BASE_URL = "https://crystal-cloud-shine.lovable.app";
+const BASE_URL = "https://tree-service-cloud.lovable.app";
 
 export const Route = createFileRoute("/sitemap.xml")({
   server: {
