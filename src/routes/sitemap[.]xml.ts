@@ -1,7 +1,6 @@
-import { createFileRoute } from '@tanstack/react-router'
-import { createFileRoute } from "@tanstack/react-start";
+import { createFileRoute } from "@tanstack/react-router";
 
-const BASE_URL = "https://tree-service-cloud.lovable.app";
+const BASE_URL = "https://treeservicebiz.com";
 
 export const Route = createFileRoute("/sitemap.xml")({
   server: {
@@ -25,4 +24,4 @@ export const Route = createFileRoute("/sitemap.xml")({
       },
     },
   },
-});
+} as any);
