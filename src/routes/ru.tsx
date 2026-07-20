@@ -19,7 +19,7 @@ export const Route = createFileRoute("/ru")({
         { name: "description", content: s.description },
         { property: "og:title", content: s.title },
         { property: "og:description", content: s.description },
-        { property: "og:url", content: "https://crystal-cloud-shine.lovable.app/ru" },
+        { property: "og:url", content: "https://treeservicebiz.com/ru" },
         { property: "og:locale", content: "ru_RU" },
         { property: "og:locale:alternate", content: "en_US" },
         { name: "language", content: "Russian" },
@@ -27,10 +27,10 @@ export const Route = createFileRoute("/ru")({
         { name: "twitter:description", content: s.description },
       ],
       links: [
-        { rel: "canonical", href: "https://crystal-cloud-shine.lovable.app/ru" },
-        { rel: "alternate", hrefLang: "en", href: "https://crystal-cloud-shine.lovable.app/" },
-        { rel: "alternate", hrefLang: "ru", href: "https://crystal-cloud-shine.lovable.app/ru" },
-        { rel: "alternate", hrefLang: "x-default", href: "https://crystal-cloud-shine.lovable.app/" },
+        { rel: "canonical", href: "https://treeservicebiz.com/ru" },
+        { rel: "alternate", hrefLang: "en", href: "https://treeservicebiz.com/" },
+        { rel: "alternate", hrefLang: "ru", href: "https://treeservicebiz.com/ru" },
+        { rel: "alternate", hrefLang: "x-default", href: "https://treeservicebiz.com/" },
       ],
       scripts: [
         {
@@ -39,9 +39,9 @@ export const Route = createFileRoute("/ru")({
             "@context": "https://schema.org",
             "@type": "LocalBusiness",
             name: "TREE SERVICE",
-            image: "https://crystal-cloud-shine.lovable.app/og-image.jpg",
+            image: "https://treeservicebiz.com/og-image.jpg",
             telephone: "+1-916-890-8080",
-            url: "https://crystal-cloud-shine.lovable.app/ru",
+            url: "https://treeservicebiz.com/ru",
             priceRange: "$$",
             address: {
               "@type": "PostalAddress",

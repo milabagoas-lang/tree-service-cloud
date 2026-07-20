@@ -115,7 +115,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "@context": "https://schema.org",
           "@type": "Organization",
           name: "TREE SERVICE",
-          url: "https://crystal-cloud-shine.lovable.app",
+          url: "https://treeservicebiz.com",
           telephone: "+1-916-890-8080",
           areaServed: "Sacramento, CA",
           description:
