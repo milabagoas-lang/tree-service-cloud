@@ -89,6 +89,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "Безопасное удаление деревьев любой сложности, чистка пальм, обрезка веток над домом и услуги арбориста в Sacramento. 📞 916-890-8080",
       },
       { property: "og:type", content: "website" },
+      { name: "google-site-verification", content: "c6ARU7HYKJAgbsklk5oxiIOkf-KA_myKmfS9iYsrzcc" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "TREE SERVICE — Профессиональный спил и обрезка деревьев" },
       {
