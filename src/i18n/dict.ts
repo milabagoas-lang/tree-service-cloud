@@ -224,7 +224,7 @@ export const en = {
     all: "All articles",
     read: "Read article",
     posts: [
-      { tag: "Tree removal", title: "When is a tree too dangerous to keep?", date: "Jun 2026" },
+      { tag: "Tree removal", title: "When is a tree too dangerous to keep?", date: "Jun 2026", href: "https://docs.google.com/document/d/14oSwTX-LmvtXpiegPIflyPm1r65pDIhoUt_cLf9sQK8/edit?usp=sharing" },
       { tag: "Pruning", title: "How to prune branches over your roof safely", date: "May 2026" },
       { tag: "Palm care", title: "Why palm cleaning matters for California homes", date: "Apr 2026", href: palmCleaningPdf.url },
     ],
@@ -478,7 +478,7 @@ export const ru: Dict = {
     all: "Все статьи",
     read: "Читать статью",
     posts: [
-      { tag: "Спил деревьев", title: "Когда дерево слишком опасно, чтобы его оставлять?", date: "Июнь 2026" },
+      { tag: "Спил деревьев", title: "Когда дерево слишком опасно, чтобы его оставлять?", date: "Июнь 2026", href: "https://docs.google.com/document/d/14oSwTX-LmvtXpiegPIflyPm1r65pDIhoUt_cLf9sQK8/edit?usp=sharing" },
       { tag: "Обрезка", title: "Как безопасно обрезать ветки над крышей", date: "Май 2026" },
       { tag: "Уход за пальмами", title: "Почему чистка пальм важна для домов Калифорнии", date: "Апр 2026", href: palmCleaningPdf.url },
     ],
