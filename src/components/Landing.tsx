@@ -88,7 +88,7 @@ export function Landing({ lang }: { lang: Lang }) {
       <Services t={t} overrides={overrides} lang={lang} />
       <Testimonials t={t} />
       <FAQ t={t} />
-      <Blog t={t} />
+      <Blog t={t} lang={lang} />
       <Contact t={t} lang={lang} socials={overrides?.contacts_socials} />
       <Footer t={t} lang={lang} />
     </main>
