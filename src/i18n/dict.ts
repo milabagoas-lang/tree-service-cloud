@@ -1,4 +1,4 @@
-import palmCleaningPdf from "@/assets/palm-cleaning-california.pdf.asset.json";
+
 
 export type Lang = "en" | "ru";
 
