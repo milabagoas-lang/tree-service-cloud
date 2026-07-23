@@ -785,7 +785,7 @@ function FAQ({ t }: { t: Dict }) {
 }
 
 /* ---------- Blog ---------- */
-function Blog({ t }: { t: Dict }) {
+function Blog({ t, lang }: { t: Dict; lang: Lang }) {
   return (
     <section className="section-y border-t border-border/60">
       <div className="container-x">
