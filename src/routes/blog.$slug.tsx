@@ -1,16 +1,14 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, ArrowUpRight, Calendar, Tag } from "lucide-react";
-import { z } from "zod";
-import { zodValidator } from "@tanstack/zod-adapter";
 import { getArticle, listArticles, type Block } from "@/i18n/articles";
 import type { Lang } from "@/i18n/dict";
 
-const searchSchema = z.object({
-  lang: z.enum(["en", "ru"]).catch("en").default("en"),
-});
-
 export const Route = createFileRoute("/blog/$slug")({
-  validateSearch: zodValidator(searchSchema),
+  validateSearch: (search: Record<string, unknown>) => {
+    const l = search.lang;
+    const lang: Lang = l === "ru" ? "ru" : "en";
+    return { lang };
+  },
   loaderDeps: ({ search: { lang } }) => ({ lang }),
   loader: ({ params, deps }) => {
     const article = getArticle(params.slug, deps.lang);
