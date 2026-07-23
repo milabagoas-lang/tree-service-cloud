@@ -1,7 +1,8 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, ArrowUpRight, Calendar, Tag } from "lucide-react";
-import { getArticle, listArticles, type Block } from "@/i18n/articles";
+import { getArticle, listArticles, type Article, type Block } from "@/i18n/articles";
 import type { Lang } from "@/i18n/dict";
+import { getArticleBySlug, type DbArticle } from "@/lib/articles.functions";
 
 export const Route = createFileRoute("/blog/$slug")({
   validateSearch: (search: Record<string, unknown>) => {
@@ -10,8 +11,13 @@ export const Route = createFileRoute("/blog/$slug")({
     return { lang };
   },
   loaderDeps: ({ search: { lang } }) => ({ lang }),
-  loader: ({ params, deps }) => {
-    const article = getArticle(params.slug, deps.lang);
+  loader: async ({ params, deps }) => {
+    const db = await getArticleBySlug({ data: { slug: params.slug, lang: deps.lang } }).catch(
+      () => null,
+    );
+    const article: Article | undefined = db
+      ? dbToArticle(db)
+      : getArticle(params.slug, deps.lang);
     if (!article) throw notFound();
     return { article, lang: deps.lang };
   },
@@ -44,6 +50,56 @@ export const Route = createFileRoute("/blog/$slug")({
   ),
   notFoundComponent: () => <ArticleNotFound />,
 });
+
+function dbToArticle(db: DbArticle): Article {
+  return {
+    slug: db.slug,
+    category: db.category,
+    date: db.date_label,
+    tags: db.tags ?? [],
+    title: db.title,
+    excerpt: db.excerpt,
+    blocks: parseContent(db.content),
+  };
+}
+
+/**
+ * Lightweight markdown-ish parser. Blocks are separated by blank lines.
+ * Supported per block:
+ *   "## Heading"        → h2
+ *   "> quote text"      → quote (may span multiple lines)
+ *   "- item" lines      → ul
+ *   "1. item" lines     → ol
+ *   anything else       → p
+ */
+function parseContent(raw: string): Block[] {
+  if (!raw?.trim()) return [];
+  const chunks = raw.replace(/\r\n/g, "\n").split(/\n\s*\n/);
+  const blocks: Block[] = [];
+  for (const chunk of chunks) {
+    const lines = chunk.split("\n").map((l) => l.trimEnd()).filter((l) => l.length > 0);
+    if (lines.length === 0) continue;
+
+    if (lines[0].startsWith("## ")) {
+      blocks.push({ type: "h2", text: lines[0].slice(3).trim() });
+      continue;
+    }
+    if (lines.every((l) => l.startsWith("> "))) {
+      blocks.push({ type: "quote", text: lines.map((l) => l.slice(2)).join(" ").trim() });
+      continue;
+    }
+    if (lines.every((l) => /^-\s+/.test(l))) {
+      blocks.push({ type: "ul", items: lines.map((l) => l.replace(/^-\s+/, "").trim()) });
+      continue;
+    }
+    if (lines.every((l) => /^\d+\.\s+/.test(l))) {
+      blocks.push({ type: "ol", items: lines.map((l) => l.replace(/^\d+\.\s+/, "").trim()) });
+      continue;
+    }
+    blocks.push({ type: "p", text: lines.join(" ") });
+  }
+  return blocks;
+}
 
 function ArticleNotFound() {
   const { lang } = Route.useSearch();
