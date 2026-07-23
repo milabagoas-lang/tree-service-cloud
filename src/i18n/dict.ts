@@ -478,9 +478,9 @@ export const ru: Dict = {
     all: "Все статьи",
     read: "Читать статью",
     posts: [
-      { tag: "Спил деревьев", title: "Когда дерево слишком опасно, чтобы его оставлять?", date: "Июнь 2026", href: "https://docs.google.com/document/d/14oSwTX-LmvtXpiegPIflyPm1r65pDIhoUt_cLf9sQK8/edit?usp=sharing" },
-      { tag: "Обрезка", title: "Как безопасно обрезать ветки над крышей", date: "Май 2026" },
-      { tag: "Уход за пальмами", title: "Почему чистка пальм важна для домов Калифорнии", date: "Апр 2026", href: palmCleaningPdf.url },
+      { slug: "kogda-derevo-opasno", tag: "Спил деревьев", title: "Когда дерево слишком опасно, чтобы его оставлять?", date: "Июнь 2026" },
+      { slug: "kak-obrezat-vetki-nad-kryshey", tag: "Обрезка", title: "Как безопасно обрезать ветки над крышей", date: "Май 2026" },
+      { slug: "pochemu-chistka-palm-vazhna", tag: "Уход за пальмами", title: "Почему чистка пальм важна для домов Калифорнии", date: "Апр 2026" },
     ],
   },
   contact: {
