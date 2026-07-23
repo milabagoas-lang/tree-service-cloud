@@ -1,3 +1,5 @@
+import palmCleaningPdf from "@/assets/palm-cleaning-california.pdf.asset.json";
+
 export type Lang = "en" | "ru";
 
 export const LANGS: Lang[] = ["en", "ru"];
@@ -478,7 +480,7 @@ export const ru: Dict = {
     posts: [
       { tag: "Спил деревьев", title: "Когда дерево слишком опасно, чтобы его оставлять?", date: "Июнь 2026" },
       { tag: "Обрезка", title: "Как безопасно обрезать ветки над крышей", date: "Май 2026" },
-      { tag: "Уход за пальмами", title: "Почему чистка пальм важна для домов Калифорнии", date: "Апр 2026" },
+      { tag: "Уход за пальмами", title: "Почему чистка пальм важна для домов Калифорнии", date: "Апр 2026", href: palmCleaningPdf.url },
     ],
   },
   contact: {
