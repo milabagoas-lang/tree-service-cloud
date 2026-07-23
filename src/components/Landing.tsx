@@ -800,7 +800,13 @@ function Blog({ t }: { t: Dict }) {
         </div>
         <div className="mt-12 grid gap-4 md:grid-cols-3">
           {t.blog.posts.map((p) => (
-            <a key={p.title} href={("href" in p && p.href) || "#"} target={("href" in p && p.href) ? "_blank" : undefined} rel={("href" in p && p.href) ? "noopener noreferrer" : undefined} className="card-surface card-hover group flex flex-col p-6">
+            <Link
+              key={p.slug}
+              to="/blog/$slug"
+              params={{ slug: p.slug }}
+              search={{ lang }}
+              className="card-surface card-hover group flex flex-col p-6"
+            >
               <div className="flex items-center justify-between">
                 <span className="rounded-full border border-border bg-secondary/40 px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
                   {p.tag}
@@ -812,7 +818,7 @@ function Blog({ t }: { t: Dict }) {
                 {t.blog.read}
                 <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
               </div>
-            </a>
+            </Link>
           ))}
         </div>
       </div>
