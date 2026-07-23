@@ -110,7 +110,7 @@ function ArticlePage() {
           )}
 
           <div className="mt-12 space-y-6 text-base leading-relaxed text-foreground/90">
-            {article.blocks.map((block, i) => (
+            {article.blocks.map((block: Block, i: number) => (
               <BlockView key={i} block={block} />
             ))}
           </div>
