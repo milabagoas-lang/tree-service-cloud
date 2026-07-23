@@ -98,7 +98,7 @@ function ArticlePage() {
           {article.tags.length > 0 && (
             <div className="mt-6 flex flex-wrap items-center gap-2">
               <Tag className="h-3.5 w-3.5 text-muted-foreground" />
-              {article.tags.map((tag) => (
+              {article.tags.map((tag: string) => (
                 <span
                   key={tag}
                   className="rounded-full border border-border/60 px-2.5 py-0.5 text-xs text-muted-foreground"
