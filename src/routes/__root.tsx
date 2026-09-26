@@ -90,6 +90,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:type", content: "website" },
       { name: "google-site-verification", content: "c6ARU7HYKJAgbsklk5oxiIOkf-KA_myKmfS9iYsrzcc" },
+      { name: "google-site-verification", content: "E_cIe3J1q9dsL8Gk4L8msk0rytkzONNeECVX55zWU1M" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "TREE SERVICE — Профессиональный спил и обрезка деревьев" },
       {
